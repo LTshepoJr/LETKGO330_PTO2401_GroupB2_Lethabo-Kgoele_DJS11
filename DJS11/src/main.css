@@ -1,10 +1,11 @@
 :root {
-  --font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --font-Noto: "Noto Sans", sans-serif;
+  --font-Lato: "Lato", sans-serif;
   --line-height: 1.5;
   --font-weight: 400;
 
   --color-scheme: light dark;
-  --color: rgba(255, 255, 255, 0.87);
+  --color: antiquewhite;
   --background-color: #242424;
 
   --font-synthesis: none;
@@ -12,3 +13,47 @@
   --webkit-font-smoothing: antialiased;
   --moz-osx-font-smoothing: grayscale;
 }
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--color);
+  font-family: var(--font-Noto);
+  padding-top: 80px;
+  padding-bottom: 74px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-Lato);
+  font-weight: 700;
+}
+
+/* 
+@media (min-width: 600px) {
+  .about-me {
+      display: grid;
+      grid-template-columns: 1fr 200px;
+      grid-template-areas: 
+          "title img"
+          "subtitle img"
+          "text img";
+      grid-column-gap: 2em;
+  } */
+
+/* @media (min-width: 800px) {
+    :root {
+        --fs-h1: 4.5rem;
+        --fs-h2: 3.75rem;
+        --fs-h3: 1.5rem;
+        --fs-body: 1.125rem;
+    }
+} */

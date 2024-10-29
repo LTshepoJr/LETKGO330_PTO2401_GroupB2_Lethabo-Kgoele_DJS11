@@ -1,7 +1,11 @@
+import { GrAssistListening } from "react-icons/gr";
 const Header = () => {
   return (
     <>
-      <h2>The Podcast</h2>
+      <h1 className="mainHeading">
+        <GrAssistListening />
+        The Podcast
+      </h1>
     </>
   );
 };
