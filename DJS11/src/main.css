@@ -14,6 +14,12 @@
   --moz-osx-font-smoothing: grayscale;
 }
 
+@media (min-width: 676px) {
+  :root {
+    --fs-h1: 2.8rem;
+  }
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -35,6 +41,7 @@ h5,
 h6 {
   font-family: var(--font-Lato);
   font-weight: 700;
+  font-size: var(--fs-h1);
 }
 
 /* 
@@ -48,12 +55,3 @@ h6 {
           "text img";
       grid-column-gap: 2em;
   } */
-
-/* @media (min-width: 800px) {
-    :root {
-        --fs-h1: 4.5rem;
-        --fs-h2: 3.75rem;
-        --fs-h3: 1.5rem;
-        --fs-body: 1.125rem;
-    }
-} */
