@@ -12,12 +12,20 @@ const MainBody = () => {
       .catch((err) => setError(err));
   }, []);
   const pod = podcast.map(({ image, id }) => {
-    return <img src={image} alt="Podcast Picture" key={id} width="100rem" />;
+    return (
+      <div key={id}>
+        <img src={image} alt="Podcast Picture" className="img" />
+      </div>
+    );
   });
   const renderPodcast = load ? pod : <h1>Loading...</h1>;
   const errorMessage = <h1 className="jsonError">Something went wrong!!</h1>;
   const output = error ? errorMessage : renderPodcast;
-  return <>{output}</>;
+  return (
+    <>
+      <div className="preview">{output}</div>
+    </>
+  );
 };
 
 export default MainBody;

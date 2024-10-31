@@ -7,7 +7,22 @@
   --redwood: #b76254ff;
   --melon: #f7a598ff;
   --mountbatten-pink: #967a8eff;
+  --img-width: 10rem;
 }
+
+@media (max-width: 650px) {
+  :root {
+    --gap-width: 1rem;
+  }
+}
+/* @media (min-width: 500px) {
+  .preview {
+    display: grid;
+    gap: var(--gap-width);
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+  }
+} */
 
 .mainHeading {
   position: fixed;
@@ -110,4 +125,15 @@ footer {
 
 .btn > * {
   font-size: x-large;
+}
+
+.preview {
+  display: grid;
+  gap: var(--gap-width);
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.img {
+  width: var(--img-width);
 }

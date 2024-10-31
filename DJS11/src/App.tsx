@@ -1,7 +1,7 @@
 import { Routes, BrowserRouter, Route } from "react-router-dom";
 import MainPage from "./Main_Components/MainPage";
 import MainBody from "./Main_Components/MainBody";
-import Genres from "./Main_Components/Genres";
+import Genres from "./Main_Components/Genres/Genres";
 
 function App() {
   return (
