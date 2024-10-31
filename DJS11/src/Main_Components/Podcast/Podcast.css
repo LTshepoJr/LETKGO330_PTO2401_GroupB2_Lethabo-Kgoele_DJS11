@@ -1,0 +1,61 @@
+:root {
+  --norm-color: antiquewhite;
+  --background-black: #3c3b3b7e;
+  --purple: #350b38;
+  --pale-dogwood: #f6d3c3ff;
+  --uranian-blue: #b5d3f8ff;
+  --redwood: #b76254ff;
+  --melon: #f7a598ff;
+  --mountbatten-pink: #967a8eff;
+  --img-width: 10rem;
+  --padding-inline: 0.3rem 1.3rem;
+}
+
+.podcastContainer {
+  font-size: large;
+}
+
+.podcastContainer h2 {
+  padding: var(--padding-inline);
+}
+
+.podcastContainer h3 {
+  color: var(--redwood);
+  padding: var(--padding-inline);
+}
+
+.podcastContainer h4 {
+  color: var(--pale-dogwood);
+  padding: var(--padding-inline);
+}
+.podcastContainer h5 {
+  color: var(--mountbatten-pink);
+  padding: var(--padding-inline);
+}
+.podcastContainer h6 {
+  color: var(--uranian-blue);
+  padding: var(--padding-inline);
+}
+
+.podcastContainer p {
+  padding: var(--padding-inline);
+}
+
+.podcastImage {
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  margin: 0.8rem;
+  transition: all 0.2s ease-in-out;
+  background-color: transparent;
+}
+
+.podcastImage img {
+  height: 20rem;
+  border-radius: 5px;
+  margin-right: 2rem;
+}
+
+.podcastImage > h3 {
+  font-size: x-large;
+}
