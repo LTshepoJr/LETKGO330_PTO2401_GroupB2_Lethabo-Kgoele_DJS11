@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const MainBody = () => {
   const [podcast, setPodcast] = useState([]);
@@ -11,11 +12,14 @@ const MainBody = () => {
       .then((data) => setPodcast(data))
       .catch((err) => setError(err));
   }, []);
-  const pod = podcast.map(({ image, id }) => {
+  const pod = podcast.map(({ image, id, title }) => {
     return (
-      <div key={id}>
-        <img src={image} alt="Podcast Picture" className="img" />
-      </div>
+      <Link to={id} className="podcastWrapper" key={id}>
+        <div key={id} className="singlePodcast">
+          <img src={image} alt={`${title} Picture`} />
+          <h4>{title}</h4>
+        </div>
+      </Link>
     );
   });
   const renderPodcast = load ? pod : <h1>Loading...</h1>;

@@ -14,12 +14,6 @@
   --moz-osx-font-smoothing: grayscale;
 }
 
-@media (min-width: 676px) {
-  :root {
-    --fs-h1: 2.8rem;
-  }
-}
-
 * {
   padding: 0;
   margin: 0;
@@ -41,7 +35,6 @@ h5,
 h6 {
   font-family: var(--font-Lato);
   font-weight: 700;
-  font-size: var(--fs-h1);
 }
 
 /* 
