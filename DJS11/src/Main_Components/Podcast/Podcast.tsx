@@ -8,6 +8,7 @@ const Podcast = () => {
   const [podcast, setPodcast] = useState([]);
   const [load, setLoad] = useState(false);
   const [error, setError] = useState(null);
+  const filterIdArray = podcast.filter(({ id }) => id === paramsId);
 
   useEffect(() => {
     setLoad(true);
@@ -18,16 +19,20 @@ const Podcast = () => {
       .finally(() => setLoad(false));
   }, [id]);
 
-  const filterIdArray = podcast.filter(({ id }) => id === paramsId);
   function sliceDate<T extends string>(updated: T) {
     return updated.slice(0, updated.indexOf("T"));
   }
+
+  function updateTitle<T extends string>(title: T) {
+    return title.replace("&amp;", "&");
+  }
+
   const pod = filterIdArray.map(
     ({ title, id, description, seasons, updated, image }) => (
       <div key={id} className="podcastContainer">
         <div className="podcastImage">
           <img src={image} alt={`${title} Picture`} />
-          <h3>{title}</h3>
+          <h3>{updateTitle(title)}</h3>
         </div>
         <div>
           <h5>Seasons: {seasons}</h5>
