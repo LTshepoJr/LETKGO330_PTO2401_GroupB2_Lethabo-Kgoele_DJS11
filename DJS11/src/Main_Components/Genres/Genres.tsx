@@ -11,7 +11,8 @@ const Genres = () => {
     fetch("https://podcast-api.netlify.app/")
       .then((prom) => prom.json())
       .then((data) => setGenresArray(data))
-      .catch((err) => setError(err));
+      .catch((err) => setError(err))
+      .finally(() => setLoad(false));
   }, []);
 
   const genreArray: string[] = [
@@ -40,11 +41,18 @@ const Genres = () => {
       </div>
     ));
   }
+
+  if (load) {
+    return <h1>Loading...</h1>;
+  }
+
+  if (error) {
+    return <h1 className="jsonError">Something went wrong!!</h1>;
+  }
+
   const genreResult = genreDisplay(genreArray);
-  const renderGenre = load ? genreResult : <h1>Loading...</h1>;
-  const errorMessage = <h1 className="jsonError">Something went wrong!!</h1>;
-  const output = error ? errorMessage : renderGenre;
-  return <>{output}</>;
+
+  return <>{genreResult}</>;
 };
 
 export default Genres;

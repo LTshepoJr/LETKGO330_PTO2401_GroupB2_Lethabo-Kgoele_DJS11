@@ -10,9 +10,11 @@ const MainBody = () => {
     fetch("https://podcast-api.netlify.app/")
       .then((prom) => prom.json())
       .then((data) => setPodcast(data))
-      .catch((err) => setError(err));
+      .catch((err) => setError(err))
+      .finally(() => setLoad(false));
   }, []);
   const pod = podcast.map(({ image, id, title }) => {
+    console.log(id);
     return (
       <Link to={id} className="podcastWrapper" key={id}>
         <div key={id} className="singlePodcast">
@@ -22,12 +24,18 @@ const MainBody = () => {
       </Link>
     );
   });
-  const renderPodcast = load ? pod : <h1>Loading...</h1>;
-  const errorMessage = <h1 className="jsonError">Something went wrong!!</h1>;
-  const output = error ? errorMessage : renderPodcast;
+
+  if (load) {
+    return <h1>Loading...</h1>;
+  }
+
+  if (error) {
+    return <h1 className="jsonError">Something went wrong!!</h1>;
+  }
+
   return (
     <>
-      <div className="preview">{output}</div>
+      <div className="preview">{pod}</div>
     </>
   );
 };
