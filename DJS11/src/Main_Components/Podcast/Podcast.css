@@ -15,30 +15,29 @@
   font-size: large;
 }
 
-.podcastContainer h2 {
+.podcastContainer h1 {
+  color: var(--norm-color);
   padding: var(--padding-inline);
 }
-
-.podcastContainer h3 {
-  color: var(--redwood);
+.podcastContainer h2 {
   padding: var(--padding-inline);
+  text-decoration: underline;
+  color: var(--norm-color);
 }
 
 .podcastContainer h4 {
-  color: var(--pale-dogwood);
+  color: var(--uranian-blue);
   padding: var(--padding-inline);
 }
+
 .podcastContainer h5 {
   color: var(--mountbatten-pink);
-  padding: var(--padding-inline);
-}
-.podcastContainer h6 {
-  color: var(--uranian-blue);
   padding: var(--padding-inline);
 }
 
 .podcastContainer p {
   padding: var(--padding-inline);
+  color: var(--pale-dogwood);
 }
 
 .podcastImage {

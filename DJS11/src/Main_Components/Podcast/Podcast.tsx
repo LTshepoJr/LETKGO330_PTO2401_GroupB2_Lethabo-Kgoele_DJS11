@@ -32,11 +32,11 @@ const Podcast = () => {
       <div key={id} className="podcastContainer">
         <div className="podcastImage">
           <img src={image} alt={`${title} Picture`} />
-          <h3>{updateTitle(title)}</h3>
+          <h1>{updateTitle(title)}</h1>
         </div>
         <div>
-          <h5>Seasons: {seasons}</h5>
-          <h6>Date Updated: {sliceDate(updated)}</h6>
+          <h4>Seasons: {seasons}</h4>
+          <h5>Date Updated: {sliceDate(updated)}</h5>
         </div>
         <div>
           <h2>About</h2>

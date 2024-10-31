@@ -4,7 +4,7 @@ const Header = () => {
     <>
       <h1 className="mainHeading">
         <GrAssistListening />
-        The Podcast
+        The Voice Pod
       </h1>
     </>
   );
