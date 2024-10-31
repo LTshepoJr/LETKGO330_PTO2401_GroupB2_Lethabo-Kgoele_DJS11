@@ -14,7 +14,6 @@ const MainBody = () => {
       .finally(() => setLoad(false));
   }, []);
   const pod = podcast.map(({ image, id, title }) => {
-    console.log(id);
     return (
       <Link to={id} className="podcastWrapper" key={id}>
         <div key={id} className="singlePodcast">
