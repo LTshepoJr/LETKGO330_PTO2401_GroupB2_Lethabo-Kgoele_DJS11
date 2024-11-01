@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 const MainBody = () => {
   const [podcast, setPodcast] = useState([]);
   const [load, setLoad] = useState(false);
   const [error, setError] = useState(null);
+  const [type, setFilter] = useSearchParams();
+  const typeFilter = type.get("type");
 
   useEffect(() => {
     setLoad(true);
@@ -19,9 +21,31 @@ const MainBody = () => {
     return title.replace("&amp;", "&");
   }
 
-  const pod = podcast.map(({ image, id, title }) => {
+  function handleFilterType(key: string, type: string | null) {
+    setFilter((prev) => {
+      if (type === null) {
+        prev.delete(key);
+      } else {
+        prev.set(key, type);
+      }
+      return prev;
+    });
+  }
+  const result = podcast.filter(({ genres }) => {
+    const genre: number[] = genres;
+    if (genre.includes(Number(typeFilter))) {
+      return genre;
+    }
+  });
+  const filterPod = typeFilter ? result : podcast;
+  const pod = filterPod.map(({ image, id, title }) => {
     return (
-      <Link to={id} className="podcastWrapper" key={id}>
+      <Link
+        to={id}
+        className="podcastWrapper"
+        key={id}
+        state={{ searchParams: `?${type}`, type: typeFilter }}
+      >
         <div key={id} className="singlePodcast">
           <img src={image} alt={`${title} Picture`} />
           <h4>{updateTitle(title)}</h4>
@@ -40,6 +64,80 @@ const MainBody = () => {
 
   return (
     <>
+      <div className="buttons">
+        <button
+          className={`genreType ${typeFilter === "1" ? "selected" : ""}`}
+          type="button"
+          onClick={() => handleFilterType("type", "1")}
+        >
+          Personal Growth
+        </button>
+        <button
+          className={`genreType ${typeFilter === "2" ? "selected" : ""}`}
+          type="button"
+          onClick={() => handleFilterType("type", "2")}
+        >
+          Investigative Journalism
+        </button>
+        <button
+          className={`genreType ${typeFilter === "3" ? "selected" : ""}`}
+          type="button"
+          onClick={() => handleFilterType("type", "3")}
+        >
+          History
+        </button>
+        <button
+          className={`genreType ${typeFilter === "4" ? "selected" : ""}`}
+          type="button"
+          onClick={() => handleFilterType("type", "4")}
+        >
+          Comedy
+        </button>
+        <button
+          className={`genreType ${typeFilter === "5" ? "selected" : ""}`}
+          type="button"
+          onClick={() => handleFilterType("type", "5")}
+        >
+          Entertainment
+        </button>
+        <button
+          className={`genreType ${typeFilter === "6" ? "selected" : ""}`}
+          type="button"
+          onClick={() => handleFilterType("type", "6")}
+        >
+          Business
+        </button>
+        <button
+          className={`genreType ${typeFilter === "7" ? "selected" : ""}`}
+          type="button"
+          onClick={() => handleFilterType("type", "7")}
+        >
+          Fiction
+        </button>
+        <button
+          className={`genreType ${typeFilter === "8" ? "selected" : ""}`}
+          type="button"
+          onClick={() => handleFilterType("type", "8")}
+        >
+          News
+        </button>
+        <button
+          className={`genreType ${typeFilter === "9" ? "selected" : ""}`}
+          type="button"
+          onClick={() => handleFilterType("type", "9")}
+        >
+          Kids and Family
+        </button>
+        {typeFilter ? (
+          <button
+            className={`genreType clear-filters`}
+            type="button"
+            onClick={() => handleFilterType("type", null)}
+          >
+            Clear Filter
+          </button>
+        ) : null}
+      </div>
       <div className="preview">{pod}</div>
     </>
   );

@@ -9,6 +9,7 @@
   --mountbatten-pink: #967a8eff;
   --img-width: 10rem;
   --padding-inline: 0.3rem 1.3rem;
+  --font-Lato: "Lato", sans-serif;
 }
 
 .podcastContainer {
@@ -25,6 +26,11 @@
   color: var(--norm-color);
 }
 
+.podcastContainer h3 {
+  color: var(--redwood);
+  padding: var(--padding-inline);
+}
+
 .podcastContainer h4 {
   color: var(--uranian-blue);
   padding: var(--padding-inline);
@@ -35,7 +41,7 @@
   padding: var(--padding-inline);
 }
 
-.podcastContainer p {
+.paragraph {
   padding: var(--padding-inline);
   color: var(--pale-dogwood);
 }
@@ -57,4 +63,10 @@
 
 .podcastImage > h3 {
   font-size: x-large;
+}
+
+.backButton > a {
+  color: var(--norm-color);
+  font-family: var(--font-Lato);
+  font-size: large;
 }

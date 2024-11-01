@@ -8,6 +8,8 @@
   --melon: #f7a598ff;
   --mountbatten-pink: #967a8eff;
   --img-width: 10rem;
+  --font-Lato: "Lato", sans-serif;
+  --btn-height: 3.4rem;
 }
 
 @media (max-width: 650px) {
@@ -165,4 +167,47 @@ footer {
   height: 70px;
   border-radius: 5px;
   margin-right: 2rem;
+}
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.genreType {
+  height: var(--btn-height);
+  padding: 6px 26px;
+  font-family: var(--font-Lato);
+  font-style: normal;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--norm-color);
+  color: #4d4d4d;
+  transition: 200ms all cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.genreType:hover {
+  color: var(--melon);
+  background-color: transparent;
+}
+
+.genreType:focus {
+  outline: var(--purple);
+}
+
+.genreType.selected {
+  color: var(--norm-color);
+  background-color: var(--melon);
+}
+
+.genreType.clear-filters {
+  height: var(--btn-height);
+  text-decoration: underline;
+  background-color: transparent;
+  color: var(--norm-color);
+}
+.genreType.clear-filters:hover {
+  color: var(--melon);
+  background-color: var(--norm-color);
 }
