@@ -48,7 +48,7 @@ const Podcast = () => {
       const des: string = description;
       const modifiedText = des.replace(
         /*html*/
-        /(http:\/\/[^\s]+)/g,
+        /(https?:\/\/[^\s]+)/g,
         `<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>`
       );
       return (
