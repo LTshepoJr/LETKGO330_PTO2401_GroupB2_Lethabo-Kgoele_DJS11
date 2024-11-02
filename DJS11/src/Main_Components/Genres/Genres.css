@@ -1,3 +1,40 @@
-.genreList {
+:root {
+  --norm-color: antiquewhite;
+  --background-black: #3c3b3b7e;
+  --Link-black: #4d4d4d;
+  --purple: #350b38;
+  --pale-dogwood: #f6d3c3ff;
+  --uranian-blue: #b5d3f8ff;
+  --redwood: #b76254ff;
+  --melon: #f7a598ff;
+  --mountbatten-pink: #967a8eff;
+  --img-width: 10rem;
+  --font-Lato: "Lato", sans-serif;
+  --btn-height: 3.4rem;
+}
+
+.Links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
+  flex-direction: column;
+}
+
+.genreLinks {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+  color: var(--norm-color);
+  font-size: 1.5rem;
+  transition: all 0.2s ease-in-out;
+  padding: 0.8rem;
+}
+
+.genreLinks:hover {
+  text-decoration: underline;
+  font-size: 1.7rem;
+  background-color: var(--melon);
+  color: var(--Link-black);
+  border-radius: 3rem;
 }

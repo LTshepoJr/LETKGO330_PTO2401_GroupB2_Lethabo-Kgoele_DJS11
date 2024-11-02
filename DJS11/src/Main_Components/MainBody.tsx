@@ -5,7 +5,7 @@ const MainBody = () => {
   const [podcast, setPodcast] = useState([]);
   const [load, setLoad] = useState(false);
   const [error, setError] = useState(null);
-  const [type, setFilter] = useSearchParams();
+  const [type, setType] = useSearchParams();
   const typeFilter = type.get("type");
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const MainBody = () => {
   }
 
   function handleFilterType(key: string, type: string | null) {
-    setFilter((prev) => {
+    setType((prev) => {
       if (type === null) {
         prev.delete(key);
       } else {
