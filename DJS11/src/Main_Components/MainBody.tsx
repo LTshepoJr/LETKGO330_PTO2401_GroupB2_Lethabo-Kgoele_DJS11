@@ -2,7 +2,20 @@ import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 
 const MainBody = () => {
+  interface Description {
+    id: number;
+    title: string;
+    description: string;
+    shows: string[];
+  }
+
   const [podcast, setPodcast] = useState([]);
+  const [description, setDescription] = useState<Description>({
+    id: 0,
+    title: "",
+    description: "",
+    shows: [""],
+  });
   const [load, setLoad] = useState(false);
   const [error, setError] = useState(null);
   const [type, setType] = useSearchParams();
@@ -10,12 +23,34 @@ const MainBody = () => {
 
   useEffect(() => {
     setLoad(true);
-    fetch("https://podcast-api.netlify.app/")
-      .then((prom) => prom.json())
-      .then((data) => setPodcast(data))
+    const genreUrl = `https://podcast-api.netlify.app/genre/${Number(
+      typeFilter
+    )}`;
+    const defaultUrl = "https://podcast-api.netlify.app/";
+
+    const fetchPromises = typeFilter
+      ? [
+          fetch(defaultUrl).then((prom) => prom.json()),
+          fetch(genreUrl).then((prom) => prom.json()),
+        ]
+      : [fetch(defaultUrl).then((prom) => prom.json())];
+
+    Promise.all(fetchPromises)
+      .then(([defaultUrl, genreUrl]) => {
+        console.log(defaultUrl);
+        console.log(genreUrl);
+        if (typeFilter) {
+          setPodcast(defaultUrl);
+          setDescription(genreUrl);
+        } else {
+          setPodcast(defaultUrl);
+        }
+      })
       .catch((err) => setError(err))
       .finally(() => setLoad(false));
-  }, []);
+  }, [typeFilter]);
+
+  const filterDes = description.description;
 
   function updateTitle<T extends string>(title: T) {
     return title.replace("&amp;", "&");
@@ -136,6 +171,16 @@ const MainBody = () => {
           >
             Clear Filter
           </button>
+        ) : null}
+      </div>
+      <div className="about">
+        {typeFilter ? <h2>About</h2> : null}
+        {typeFilter ? (
+          <>
+            <p>{filterDes}</p>
+            <br />
+            <hr />
+          </>
         ) : null}
       </div>
       <div className="preview">{pod}</div>

@@ -182,14 +182,14 @@ footer {
   cursor: pointer;
   border: none;
   border-radius: 5px;
-  background-color: var(--norm-color);
-  color: #4d4d4d;
   transition: 200ms all cubic-bezier(0.4, 0, 0.2, 1);
+  background-color: transparent;
+  color: var(--melon);
 }
 
 .genreType:hover {
-  color: var(--melon);
-  background-color: transparent;
+  color: #4d4d4d;
+  background-color: var(--norm-color);
 }
 
 .genreType:focus {
@@ -210,4 +210,9 @@ footer {
 .genreType.clear-filters:hover {
   color: var(--melon);
   background-color: var(--norm-color);
+}
+
+.about h2 {
+  padding-bottom: 0.4rem;
+  text-decoration: underline;
 }
