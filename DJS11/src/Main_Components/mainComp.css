@@ -172,6 +172,8 @@ footer {
   display: flex;
   align-items: center;
   justify-content: space-around;
+  padding-bottom: 0.3rem;
+  padding-top: 0.8rem;
 }
 .genreType {
   height: var(--btn-height);
@@ -180,14 +182,15 @@ footer {
   font-style: normal;
   font-weight: 600;
   cursor: pointer;
-  border: none;
   border-radius: 5px;
   transition: 200ms all cubic-bezier(0.4, 0, 0.2, 1);
   background-color: transparent;
   color: var(--melon);
+  border: 0.1rem solid var(--melon);
 }
 
 .genreType:hover {
+  border: 0.1rem solid var(--norm-color);
   color: #4d4d4d;
   background-color: var(--norm-color);
 }
@@ -197,6 +200,7 @@ footer {
 }
 
 .genreType.selected {
+  border: 0.1rem solid var(--melon);
   color: var(--norm-color);
   background-color: var(--melon);
 }
@@ -206,6 +210,7 @@ footer {
   text-decoration: underline;
   background-color: transparent;
   color: var(--norm-color);
+  border: 0.1rem solid var(--norm-color);
 }
 .genreType.clear-filters:hover {
   color: var(--melon);
