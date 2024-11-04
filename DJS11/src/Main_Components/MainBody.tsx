@@ -37,8 +37,6 @@ const MainBody = () => {
 
     Promise.all(fetchPromises)
       .then(([defaultUrl, genreUrl]) => {
-        console.log(defaultUrl);
-        console.log(genreUrl);
         if (typeFilter) {
           setPodcast(defaultUrl);
           setDescription(genreUrl);
@@ -66,13 +64,18 @@ const MainBody = () => {
       return prev;
     });
   }
-  const result = podcast.filter(({ genres }) => {
+
+  const filteredPodcast = podcast.filter(({ genres }) => {
     const genre: number[] = genres;
     if (genre.includes(Number(typeFilter))) {
       return genre;
     }
   });
-  const filterPod = typeFilter ? result : podcast;
+
+  const filterPod = typeFilter ? filteredPodcast : podcast;
+  const titleArray: Description[] = filterPod;
+  titleArray.sort((a, b) => a.title.localeCompare(b.title));
+
   const pod = filterPod.map(({ image, id, title }) => {
     return (
       <Link
