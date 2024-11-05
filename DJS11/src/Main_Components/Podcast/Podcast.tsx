@@ -46,11 +46,35 @@ const Podcast = () => {
     ({ title, id, description, seasons, updated, image, genres }) => {
       const genre: number[] = genres;
       const des: string = description;
-      const modifiedText = des.replace(
-        /*html*/
-        /(https?:\/\/[^\s]+)/g,
-        `<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>`
-      );
+      const modifiedText = des
+        .replace(/\*{3}/g, "")
+        .replace(/\.{3}/g, "…")
+        .replace(
+          /(https?:\/\/)?(www\.[a-zA-Z0-9_-]+\.(com|net|org|io|edu)(\/[^\s]*)?)/g,
+          "$2"
+        )
+        .replace(
+          /(https?:\/\/[a-zA-Z0-9._-]+\.com[^\s]*)|((?:https?:\/\/|www\.)?[a-zA-Z0-9._-]+\.[a-zA-Z]{2,}(\/[^\s]*)?)|([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g,
+          (match, comUrl, otherUrl, _, email) => {
+            if (comUrl) {
+              return /*html*/ `<a href="${comUrl}" target="_blank" rel="noopener noreferrer">${comUrl.replace(
+                /https?:\/\//,
+                ""
+              )}</a>`;
+            }
+            if (otherUrl) {
+              const href = otherUrl.startsWith("http")
+                ? otherUrl
+                : `http://${otherUrl}`;
+              const displayText = otherUrl.replace(/https?:\/\/|www\./, ""); // Remove protocol for display
+              return /*html*/ `<a href="${href}" target="_blank" rel="noopener noreferrer">${displayText}</a>`;
+            }
+            if (email) {
+              return /*html*/ `<a class='email' href="mailto:${email}">${email}</a>`;
+            }
+            return match;
+          }
+        );
       return (
         <div key={id} className="podcastContainer">
           <div className="podcastImage">

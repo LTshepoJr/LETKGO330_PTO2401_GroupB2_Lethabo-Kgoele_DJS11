@@ -8,6 +8,9 @@ const MainBody = () => {
     description: string;
     shows: string[];
   }
+  interface titleSort {
+    title: string;
+  }
 
   const [podcast, setPodcast] = useState([]);
   const [description, setDescription] = useState<Description>({
@@ -73,7 +76,7 @@ const MainBody = () => {
   });
 
   const filterPod = typeFilter ? filteredPodcast : podcast;
-  const titleArray: Description[] = filterPod;
+  const titleArray: titleSort[] = filterPod;
   titleArray.sort((a, b) => a.title.localeCompare(b.title));
 
   const pod = filterPod.map(({ image, id, title }) => {

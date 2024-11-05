@@ -7,6 +7,8 @@
   --redwood: #b76254ff;
   --melon: #f7a598ff;
   --mountbatten-pink: #967a8eff;
+  --link-color-hover: #d9db39;
+  --link-color: #2b2bdd;
   --img-width: 10rem;
   --padding-inline: 0.3rem 1.3rem;
   --font-Lato: "Lato", sans-serif;
@@ -46,6 +48,24 @@
   color: var(--pale-dogwood);
 }
 
+.paragraph a {
+  text-decoration: none;
+  color: var(--link-color);
+  transition: all 0.2s ease-in;
+}
+
+.paragraph a:hover {
+  text-decoration: underline;
+  color: var(--link-color-hover);
+}
+.email {
+  transition: all 0.2s ease-in !important;
+  color: var(--link-color) !important;
+}
+
+.email:hover {
+  color: var(--melon) !important;
+}
 .podcastImage {
   display: flex;
   align-items: center;
