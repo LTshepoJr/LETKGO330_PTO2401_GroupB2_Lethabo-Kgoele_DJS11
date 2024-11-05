@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, Outlet, useLocation, useParams } from "react-router-dom";
 import { IoArrowBackCircleSharp } from "react-icons/io5";
 import "./Podcast.css";
 
@@ -116,6 +116,7 @@ const Podcast = () => {
         </Link>
       </div>
       {pod}
+      <Outlet context={pod} />
     </>
   );
 };
