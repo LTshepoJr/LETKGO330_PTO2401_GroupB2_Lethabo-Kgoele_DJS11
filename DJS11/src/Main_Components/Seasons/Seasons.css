@@ -3,8 +3,8 @@
   --background-black: #3c3b3b7e;
   --purple: #350b38;
   --pale-dogwood: #f6d3c3ff;
-  --uranian-blue: #b5d3f8ff;
-  --redwood: #b76254ff;
+  --grey: #333;
+  --redwood: rgb(147, 59, 45);
   --melon: #f7a598ff;
   --mountbatten-pink: #967a8eff;
   --link-color-hover: #d9db39;
@@ -17,4 +17,56 @@
 .seasonContainer,
 .filteredSeason {
   padding: var(--padding-inline);
+}
+.audioPlayer {
+  padding: 1rem 0rem;
+}
+
+.audioControls {
+  border-radius: 0.7rem;
+}
+
+.audioControls::-webkit-media-controls-panel {
+  background-color: var(--melon);
+  border-radius: 5px;
+}
+
+.audioControls::-webkit-media-controls-play-button,
+.audioControls::-webkit-media-controls-pause-button,
+.audioControls::-webkit-media-controls-mute-button,
+.audioControls::-webkit-media-controls-volume-slider-container,
+.audioControls::-webkit-media-controls-seek-back-button,
+.audioControls::-webkit-media-controls-seek-forward-button {
+  filter: brightness(0) invert(1); /* Inverts colors to white */
+}
+
+.audioControls::-webkit-media-controls-timeline::-webkit-media-controls-progress-bar {
+  background-color: var(--redwood); /* Red progress bar */
+}
+
+.seasonContainer {
+  display: inline-block;
+  position: relative;
+}
+
+/* Select Element Styling */
+#seasonSelect {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: var(--norm-color);
+  color: var(--grey);
+  cursor: pointer;
+  font-size: large;
+}
+
+#seasonSelect option {
+  background-color: var(--norm-color);
+  color: var(--grey);
+}
+
+#seasonSelect:hover,
+#seasonSelect:focus {
+  border-color: var(--melon);
+  box-shadow: 0 0 5px var(--redwood);
+  outline: none;
 }

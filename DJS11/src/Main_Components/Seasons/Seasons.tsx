@@ -72,6 +72,18 @@ const Seasons = () => {
   const handleEventChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setSeasonOption(e.target.value);
   };
+  const audioId = document.querySelectorAll(
+    ".audioControls"
+  ) as NodeListOf<HTMLAudioElement>;
+  audioId.forEach((audio) =>
+    audio.addEventListener("play", () => {
+      audioId.forEach((playingAudio) => {
+        if (audio !== playingAudio) {
+          playingAudio.pause();
+        }
+      });
+    })
+  );
 
   if (load) {
     return <h1>Loading...</h1>;
@@ -115,9 +127,11 @@ const Seasons = () => {
                     {title}
                   </h2>
                   <p>{description}</p>
-                  <audio controls>
-                    <source src={file} type="audio/mpeg"></source>
-                  </audio>
+                  <div className="audioPlayer">
+                    <audio controls className="audioControls">
+                      <source src={file} type="audio/mpeg"></source>
+                    </audio>
+                  </div>
                 </div>
               ))}
             </div>
