@@ -1,6 +1,7 @@
 import { useOutletContext } from "react-router-dom";
 import "./Seasons.css";
 import { ChangeEvent, useEffect, useState } from "react";
+import { PiCloverBold } from "react-icons/pi";
 const Seasons = () => {
   interface Seasons {
     episodes: Episodes[];
@@ -84,6 +85,20 @@ const Seasons = () => {
       });
     })
   );
+  const [selectedTitle, setSelectedTitle] = useState<string[]>([]);
+  const [favArray, setFavArray] = useState<string[]>([]);
+  console.log(favArray);
+  const favEpisode = (title: string) => {
+    setSelectedTitle((previousTitles) => {
+      if (previousTitles.includes(title)) {
+        setFavArray(previousTitles.filter((name) => name !== title));
+        return previousTitles.filter((name) => name !== title);
+      } else {
+        setFavArray([...previousTitles, title]);
+        return [...previousTitles, title];
+      }
+    });
+  };
 
   if (load) {
     return <h1>Loading...</h1>;
@@ -125,6 +140,14 @@ const Seasons = () => {
                       S{seasonOption} Ep{episode}:{" "}
                     </span>
                     {title}
+                    <span
+                      className={`favorite ${
+                        selectedTitle.includes(title) ? "favEpisodePath" : ""
+                      }`}
+                      onClick={() => favEpisode(title)}
+                    >
+                      <PiCloverBold />
+                    </span>
                   </h2>
                   <p>{description}</p>
                   <div className="audioPlayer">

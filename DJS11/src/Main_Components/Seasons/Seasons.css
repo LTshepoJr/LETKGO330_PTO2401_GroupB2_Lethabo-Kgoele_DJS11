@@ -56,3 +56,10 @@
   box-shadow: 0 0 5px var(--redwood);
   outline: none;
 }
+
+.favorite {
+  cursor: pointer;
+}
+.favEpisodePath {
+  color: var(--melon);
+}
