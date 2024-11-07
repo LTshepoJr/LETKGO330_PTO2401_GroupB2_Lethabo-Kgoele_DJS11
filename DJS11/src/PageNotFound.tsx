@@ -3,10 +3,12 @@ import "./main.css";
 
 const PageNotFound = () => {
   return (
-    <>
+    <div className="returnHome">
       <h1>This is page not found</h1>
-      <Link to="/">Return to home page</Link>
-    </>
+      <Link to="/" className="homeButton">
+        Return to home page
+      </Link>
+    </div>
   );
 };
 
