@@ -4,6 +4,7 @@ import MainBody from "./Main_Components/MainBody";
 import Genres from "./Main_Components/Genres/Genres";
 import Podcast from "./Main_Components/Podcast/Podcast";
 import Seasons from "./Main_Components/Seasons/Seasons";
+import PageNotFound from "./PageNotFound";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path=":id" element={<Podcast />}>
             <Route index element={<Seasons />} />
           </Route>
+          <Route path="*" element={<PageNotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>

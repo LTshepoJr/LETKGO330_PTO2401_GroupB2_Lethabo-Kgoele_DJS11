@@ -9,7 +9,11 @@ const Podcast = () => {
   const [podcast, setPodcast] = useState([]);
   const [load, setLoad] = useState(false);
   const [error, setError] = useState(null);
-  const filterIdArray = podcast.filter(({ id }) => id === paramsId);
+  const filterIdArray = podcast.filter(({ id }) => {
+    if (id === paramsId) {
+      return id === paramsId;
+    }
+  });
   const location = useLocation();
   const search = location.state?.searchParams || "";
   const genreArray: string[] = [
@@ -108,17 +112,21 @@ const Podcast = () => {
     return <h1 className="jsonError">Something went wrong!!</h1>;
   }
 
-  return (
-    <>
-      <div className="backButton">
-        <Link to={`..${search}`}>
-          <IoArrowBackCircleSharp /> Go back to {type} podcasts
-        </Link>
-      </div>
-      {pod}
-      <Outlet context={pod} />
-    </>
-  );
+  if (filterIdArray[0]) {
+    return (
+      <>
+        <div className="backButton">
+          <Link to={`..${search}`}>
+            <IoArrowBackCircleSharp /> Go back to {type} podcasts
+          </Link>
+        </div>
+        {pod}
+        <Outlet context={pod} />
+      </>
+    );
+  } else {
+    return <h1 className="jsonError">Requested endpoint not found!!</h1>;
+  }
 };
 
 export default Podcast;
