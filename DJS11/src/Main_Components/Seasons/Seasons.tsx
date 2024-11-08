@@ -161,12 +161,12 @@ const Seasons = () => {
                       }`}
                       onClick={() => favEpisode(title)}
                     >
-                      <h3>
+                      <h5>
                         Favorite:{" "}
                         <span>
                           <PiCloverBold />
                         </span>{" "}
-                      </h3>
+                      </h5>
                     </div>
                   </h2>
                   <p>{description}</p>

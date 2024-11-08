@@ -1,7 +1,7 @@
 import { CSSProperties } from "react";
 import { AiFillHome } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
-import { PiVisorThin } from "react-icons/pi";
+import { PiVisorThin, PiCloverBold } from "react-icons/pi";
 
 const Footer = () => {
   const active = {
@@ -35,6 +35,17 @@ const Footer = () => {
           }
         >
           <PiVisorThin />
+        </NavLink>
+        <NavLink
+          className="btn"
+          id="favoritesBtn"
+          aria-label="Favorites Button"
+          to="favorites"
+          style={({ isActive }) =>
+            isActive ? (active as CSSProperties) : undefined
+          }
+        >
+          <PiCloverBold />
         </NavLink>
       </footer>
     </>
