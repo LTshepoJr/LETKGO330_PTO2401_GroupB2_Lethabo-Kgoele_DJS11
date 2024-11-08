@@ -1,6 +1,6 @@
 # Project Name
 
-![Project Logo](path-to-logo.png)
+![Project Logo](apple-touch-icon.png)
 
 ## Table of Contents
 
@@ -18,7 +18,7 @@
 
 ## Introduction
 
-**Project Name** is a modern, responsive web application built with **React** and **TypeScript** for creating dynamic and reusable components, and **CSS** for styling. This project leverages TypeScript's type-checking to ensure code reliability and CSS modules for component-specific styling. This app is designed to be scalable, maintainable, and user-friendly, ideal for web developers looking for a boilerplate or a starting point for similar projects.
+**The Voice Pod** is a modern, responsive web application built with **React** and **TypeScript** for creating dynamic and reusable components, and **CSS** for styling. This project leverages TypeScript's type-checking to ensure code reliability and CSS modules for component-specific styling. This app is designed to be scalable, maintainable, and user-friendly, ideal for web developers looking for a boilerplate or a starting point for similar projects.
 
 ## Features
 
@@ -40,7 +40,7 @@
 ### Prerequisites
 
 - **Node.js** (v14 or above)
-- **npm** or **yarn**
+- **npm**
 
 ### Installation
 
