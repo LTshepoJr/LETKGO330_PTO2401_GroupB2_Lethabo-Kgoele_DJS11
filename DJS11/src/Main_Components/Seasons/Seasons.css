@@ -2,6 +2,7 @@
   --norm-color: antiquewhite;
   --grey: #333;
   --redwood: #933b2d;
+  --light-blue: #55cddb;
   --melon: #f7a598ff;
   --padding-inline: 0.3rem 1.3rem;
   --font-Lato: "Lato", sans-serif;
@@ -26,7 +27,7 @@
 }
 
 .audioControls::-webkit-media-controls-timeline::-webkit-media-controls-progress-bar {
-  background-color: var(--redwood); /* Red progress bar */
+  background-color: var(--redwood);
 }
 
 .seasonContainer {
@@ -34,7 +35,6 @@
   position: relative;
 }
 
-/* Select Element Styling */
 #seasonSelect {
   font-family: var(--font-Noto);
   padding: 10px;
@@ -60,10 +60,22 @@
 .favorite {
   cursor: pointer;
 }
+.favorite h3 {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding-top: 0.5rem;
+}
+.favorite h3:hover {
+  font-size: x-large;
+}
 .favEpisodePath {
   color: var(--melon);
 }
 
 .episodeBlock {
   padding-top: 0.9rem;
+}
+
+.episodeBlock p {
+  color: var(--light-blue);
 }

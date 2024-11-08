@@ -70,7 +70,7 @@ const Podcast = () => {
               const href = otherUrl.startsWith("http")
                 ? otherUrl
                 : `http://${otherUrl}`;
-              const displayText = otherUrl.replace(/https?:\/\/|www\./, ""); // Remove protocol for display
+              const displayText = otherUrl.replace(/https?:\/\/|www\./, "");
               return /*html*/ `<a href="${href}" target="_blank" rel="noopener noreferrer">${displayText}</a>`;
             }
             if (email) {

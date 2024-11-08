@@ -129,7 +129,6 @@ const Seasons = () => {
           id="seasonSelect"
           aria-label="Choose Season"
         >
-          Choose Season:
           {selectSeason.map(({ season, title }) => {
             return (
               <option key={`${title}${season}`} value={season}>
@@ -152,24 +151,24 @@ const Seasons = () => {
                       S{seasonOption} Ep{episode}:{" "}
                     </span>
                     {title}
-                    <div
-                      className={`favorite ${
-                        JSON.parse(
-                          localStorage.getItem("FavoriteNames") || "[]"
-                        ).includes(title)
-                          ? "favEpisodePath"
-                          : ""
-                      }`}
-                      onClick={() => favEpisode(title)}
-                    >
-                      <h5>
-                        Favorite:{" "}
-                        <span>
-                          <PiCloverBold />
-                        </span>{" "}
-                      </h5>
-                    </div>
                   </h2>
+                  <div
+                    className={`favorite ${
+                      JSON.parse(
+                        localStorage.getItem("FavoriteNames") || "[]"
+                      ).includes(title)
+                        ? "favEpisodePath"
+                        : ""
+                    }`}
+                    onClick={() => favEpisode(title)}
+                  >
+                    <h3>
+                      Favorite:{" "}
+                      <span>
+                        <PiCloverBold />
+                      </span>{" "}
+                    </h3>
+                  </div>
                   <p>{description}</p>
                   <div className="audioPlayer">
                     <audio controls className="audioControls">

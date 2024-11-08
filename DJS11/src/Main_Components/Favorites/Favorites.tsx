@@ -33,8 +33,13 @@ const Favorites = () => {
   const favoriteNames: string[] = JSON.parse(
     localStorage.getItem("FavoriteNames") || "[]"
   );
-  const tilt = favoriteNames.map((names) => <h1 key={names}>{names}</h1>);
-  return <>{tilt}</>;
+  const titles = favoriteNames.map((names) => <h1 key={names}>{names}</h1>);
+  return (
+    <>
+      <h1>Favorite Title Names:</h1>
+      {titles}
+    </>
+  );
 };
 
 export default Favorites;
