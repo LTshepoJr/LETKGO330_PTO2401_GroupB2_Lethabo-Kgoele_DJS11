@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { FaSortAlphaDown, FaSortAlphaUp } from "react-icons/fa";
+
 const Favorites = () => {
   // const favNames: string[] = JSON.parse(
   //     localStorage.getItem("FavoriteNames") || "[]"
@@ -27,16 +30,35 @@ const Favorites = () => {
   //     }
   //     console.log(favoriteSeason);
   //   });
-  if (!localStorage.getItem("FavoriteNames")) {
-    return <h1>NO FAVORITES!</h1>;
-  }
+
+  const storageBoolean = JSON.parse(
+    localStorage.getItem("Toggle Order") || "true"
+  );
+  const [toggleOrder, setToggleOrder] = useState(false);
+
   const favoriteNames: string[] = JSON.parse(
     localStorage.getItem("FavoriteNames") || "[]"
   );
   const titles = favoriteNames.map((names) => <h1 key={names}>{names}</h1>);
+  const sortTitles = () => {
+    const sortedTitle = [...favoriteNames.map((names) => names)].sort((a, b) =>
+      toggleOrder ? a.localeCompare(b) : b.localeCompare(a)
+    );
+    localStorage.setItem("FavoriteNames", JSON.stringify(sortedTitle));
+    setToggleOrder(!toggleOrder);
+    localStorage.setItem("Toggle Order", JSON.stringify(toggleOrder));
+  };
+
+  if (!localStorage.getItem("FavoriteNames")) {
+    return <h1>NO FAVORITES!</h1>;
+  }
+  console.log(storageBoolean);
   return (
     <>
-      <h1>Favorite Title Names:</h1>
+      <h1 onClick={sortTitles}>
+        Favorite Title Names:
+        <span>{!storageBoolean ? <FaSortAlphaDown /> : <FaSortAlphaUp />}</span>
+      </h1>
       {titles}
     </>
   );
