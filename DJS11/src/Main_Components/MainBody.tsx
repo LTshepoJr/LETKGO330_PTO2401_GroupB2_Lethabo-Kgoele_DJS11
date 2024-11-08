@@ -85,11 +85,7 @@ const MainBody = () => {
   const [toggleOrder, setToggleOrder] = useState(true);
   const [toggleDateOrder, setToggleDateOrder] = useState(false);
   const [activeSort, setActiveSort] = useState<string | null>(null);
-  titleArray.sort((a, b) =>
-    toggleOrder
-      ? a.title.localeCompare(b.title)
-      : b.title.localeCompare(a.title)
-  );
+  titleArray.sort((a, b) => a.title.localeCompare(b.title));
   const newDateArray = [...titleArray].sort((a, b) => {
     if (toggleDateOrder) {
       const dateA = new Date(a.updated.slice(0, 10)).getTime();

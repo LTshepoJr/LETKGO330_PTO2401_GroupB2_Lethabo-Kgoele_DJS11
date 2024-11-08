@@ -82,6 +82,11 @@
   .podcastImage > * {
     flex: 1 1 auto;
   }
+  .podcastImage > img {
+    text-align: center;
+    width: 10rem;
+    margin: 10px;
+  }
 
   @media (max-width: 480px) {
     .podcastImage {
@@ -90,6 +95,11 @@
     }
     .podcastImage > * {
       flex: 1 1 100%;
+    }
+    .podcastImage > img {
+      text-align: center;
+      width: 5rem;
+      margin: 10px;
     }
   }
 }
@@ -102,12 +112,6 @@
   text-align: center;
   width: 20rem;
   margin: 10px;
-}
-
-.podcastImage img {
-  height: 15rem;
-  border-radius: 5px;
-  margin-right: 2rem;
 }
 
 .podcastImage > h3 {

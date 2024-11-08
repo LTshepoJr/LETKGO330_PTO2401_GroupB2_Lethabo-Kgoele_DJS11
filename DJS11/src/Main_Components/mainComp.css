@@ -199,7 +199,8 @@ footer {
   margin-right: 2rem;
 }
 
-.buttons {
+.buttons,
+.sortingSection {
   padding-bottom: 0.3rem;
   padding-top: 0.8rem;
   align-items: center;
@@ -209,6 +210,23 @@ footer {
   max-width: 1200px;
   margin: 0 auto;
   overflow-x: hidden;
+}
+
+.genreType {
+  text-align: center;
+  flex: 1 1 200px;
+  margin: 10px;
+  height: var(--btn-height);
+  padding: 6px 26px;
+  font-family: var(--font-Lato);
+  font-style: normal;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 200ms all cubic-bezier(0.4, 0, 0.2, 1);
+  background-color: transparent;
+  color: var(--melon);
+  border: 0.1rem solid var(--melon);
 }
 
 @media (max-width: 768px) {
@@ -230,23 +248,6 @@ footer {
     flex: 1 1 100%;
     padding: 15px;
   }
-}
-
-.genreType {
-  text-align: center;
-  flex: 1 1 200px;
-  margin: 10px;
-  height: var(--btn-height);
-  padding: 6px 26px;
-  font-family: var(--font-Lato);
-  font-style: normal;
-  font-weight: 600;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: 200ms all cubic-bezier(0.4, 0, 0.2, 1);
-  background-color: transparent;
-  color: var(--melon);
-  border: 0.1rem solid var(--melon);
 }
 
 .genreType:hover {
