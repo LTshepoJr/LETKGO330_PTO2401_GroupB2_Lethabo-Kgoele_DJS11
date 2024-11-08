@@ -4,6 +4,7 @@
   --color: antiquewhite;
   --background-color: #242424;
   --melon: #f7a598ff;
+  --padding-inline: 0.3rem 1.3rem;
 }
 
 * {
@@ -67,4 +68,14 @@ h6 {
 }
 .returnHome h1 {
   margin: 2rem;
+}
+
+.sortingSection h2 {
+  cursor: pointer;
+  padding: var(--padding-inline);
+  -webkit-user-select: none;
+  user-select: none;
+}
+.sortingSection h2:hover {
+  text-decoration: underline;
 }

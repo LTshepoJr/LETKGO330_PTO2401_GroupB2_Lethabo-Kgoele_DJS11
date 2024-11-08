@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import { FaSortAlphaDown, FaSortAlphaUp } from "react-icons/fa";
+import { RiSortNumberAsc, RiSortNumberDesc } from "react-icons/ri";
 
 const MainBody = () => {
   interface Description {
@@ -10,6 +12,9 @@ const MainBody = () => {
   }
   interface titleSort {
     title: string;
+    updated: string;
+    image: string;
+    id: string;
   }
 
   const [podcast, setPodcast] = useState([]);
@@ -77,9 +82,42 @@ const MainBody = () => {
 
   const filterPod = typeFilter ? filteredPodcast : podcast;
   const titleArray: titleSort[] = filterPod;
-  titleArray.sort((a, b) => a.title.localeCompare(b.title));
+  const [toggleOrder, setToggleOrder] = useState(true);
+  const [toggleDateOrder, setToggleDateOrder] = useState(false);
+  const [activeSort, setActiveSort] = useState<string | null>(null);
+  titleArray.sort((a, b) =>
+    toggleOrder
+      ? a.title.localeCompare(b.title)
+      : b.title.localeCompare(a.title)
+  );
+  const newDateArray = [...titleArray].sort((a, b) => {
+    if (toggleDateOrder) {
+      const dateA = new Date(a.updated.slice(0, 10)).getTime();
+      const dateB = new Date(b.updated.slice(0, 10)).getTime();
+      return dateA - dateB;
+    } else {
+      const dateA = new Date(a.updated.slice(0, 10)).getTime();
+      const dateB = new Date(b.updated.slice(0, 10)).getTime();
+      return dateB - dateA;
+    }
+  });
+  if (activeSort === "sort") {
+    newDateArray.sort((a, b) =>
+      toggleOrder
+        ? a.title.localeCompare(b.title)
+        : b.title.localeCompare(a.title)
+    );
+  }
+  const sortTitleDateArray = () => {
+    setToggleDateOrder(!toggleDateOrder);
+    setActiveSort(null);
+  };
+  const sortTitleArray = () => {
+    setToggleOrder(!toggleOrder);
+    setActiveSort("sort");
+  };
 
-  const pod = filterPod.map(({ image, id, title }) => {
+  const pod = newDateArray.map(({ image, id, title }) => {
     return (
       <Link
         to={id}
@@ -188,6 +226,21 @@ const MainBody = () => {
             <hr />
           </>
         ) : null}
+      </div>
+      <div className="sortingSection">
+        <div onClick={sortTitleArray}>
+          <h2>
+            Sort Title
+            {toggleOrder ? <FaSortAlphaDown /> : <FaSortAlphaUp />}
+          </h2>
+        </div>
+        <div onClick={sortTitleDateArray}>
+          <h2>
+            Sort Date:
+            {!toggleDateOrder ? " Latest" : " Oldest"}
+            {toggleDateOrder ? <RiSortNumberAsc /> : <RiSortNumberDesc />}
+          </h2>
+        </div>
       </div>
       <div className="preview">{pod}</div>
     </>
