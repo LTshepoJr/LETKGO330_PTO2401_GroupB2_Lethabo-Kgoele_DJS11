@@ -1,4 +1,4 @@
-# Project Name
+# The Voice Pod
 
 ![Project Logo](apple-touch-icon.png)
 
@@ -33,7 +33,7 @@
 - **React**: JavaScript library for building UI components
 - **TypeScript**: JavaScript with syntax for types
 - **CSS Modules**: Scoped and reusable CSS for each component
-- **Axios** (or **Fetch API**) for HTTP requests (if applicable)
+- **Fetch API** for HTTP requests
 
 ## Getting Started
 
