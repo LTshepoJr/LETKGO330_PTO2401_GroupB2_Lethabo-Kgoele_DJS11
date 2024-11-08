@@ -1,7 +1,5 @@
 :root {
   --norm-color: antiquewhite;
-  --background-black: #3c3b3b7e;
-  --purple: #350b38;
   --pale-dogwood: #f6d3c3ff;
   --uranian-blue: #b5d3f8ff;
   --redwood: #b76254ff;
@@ -9,7 +7,6 @@
   --mountbatten-pink: #967a8eff;
   --link-color-hover: #d9db39;
   --link-color: #2b2bdd;
-  --img-width: 10rem;
   --padding-inline: 0.3rem 1.3rem;
   --font-Lato: "Lato", sans-serif;
 }
@@ -89,4 +86,13 @@
   color: var(--norm-color);
   font-family: var(--font-Lato);
   font-size: large;
+}
+
+.endpointError {
+  padding: 2rem;
+  text-align: center;
+}
+
+.endpointError h1 {
+  margin: 2rem;
 }

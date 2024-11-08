@@ -143,6 +143,7 @@ const Seasons = () => {
         {filteredSeason.map(({ title, image, episodes }) => (
           <div key={title}>
             <img src={image} alt={`${title} Picture`} width="150rem" />
+            <h1>{title}</h1>
             <div className="episodeBlock">
               {episodes.map(({ description, title, episode, file }) => (
                 <div key={title}>

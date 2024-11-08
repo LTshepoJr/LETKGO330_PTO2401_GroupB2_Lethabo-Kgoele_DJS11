@@ -63,3 +63,7 @@
 .favEpisodePath {
   color: var(--melon);
 }
+
+.episodeBlock {
+  padding-top: 0.9rem;
+}

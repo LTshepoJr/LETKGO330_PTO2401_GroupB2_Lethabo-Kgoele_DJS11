@@ -125,7 +125,14 @@ const Podcast = () => {
       </>
     );
   } else {
-    return <h1 className="jsonError">Requested endpoint not found!!</h1>;
+    return (
+      <div className="endpointError">
+        <h1 className="jsonError">Requested endpoint not found!</h1>
+        <Link to="/" className="homeButton">
+          Return to home page
+        </Link>
+      </div>
+    );
   }
 };
 

@@ -2,12 +2,8 @@
   --norm-color: antiquewhite;
   --background-black: #3c3b3b7e;
   --purple: #350b38;
-  --pale-dogwood: #f6d3c3ff;
-  --uranian-blue: #b5d3f8ff;
-  --redwood: #b76254ff;
   --melon: #f7a598ff;
   --mountbatten-pink: #967a8eff;
-  --img-width: 10rem;
   --font-Lato: "Lato", sans-serif;
   --btn-height: 3.4rem;
 }
@@ -121,8 +117,26 @@ footer {
   transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
+#favoritesBtn::after {
+  content: "Favorites";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--purple);
+  color: var(--norm-color);
+  padding: 0.3rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
 #homeBtn:hover::after,
-#genreBtn:hover::after {
+#genreBtn:hover::after,
+#favoritesBtn:hover::after {
   opacity: 1;
   visibility: visible;
 }

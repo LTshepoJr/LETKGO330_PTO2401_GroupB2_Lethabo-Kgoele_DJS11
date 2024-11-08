@@ -5,7 +5,7 @@ import Genres from "./Main_Components/Genres/Genres";
 import Podcast from "./Main_Components/Podcast/Podcast";
 import Seasons from "./Main_Components/Seasons/Seasons";
 import PageNotFound from "./PageNotFound";
-import Favorites from "./Favorites/Favorites";
+import Favorites from "./Main_Components/Favorites/Favorites";
 
 function App() {
   return (
