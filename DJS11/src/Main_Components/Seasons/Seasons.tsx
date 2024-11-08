@@ -85,19 +85,30 @@ const Seasons = () => {
       });
     })
   );
-  const [selectedTitle, setSelectedTitle] = useState<string[]>([]);
-  const [favArray, setFavArray] = useState<string[]>([]);
-  console.log(favArray);
+  const [selectedTitle, setSelectedTitle] = useState(false);
+
   const favEpisode = (title: string) => {
-    setSelectedTitle((previousTitles) => {
-      if (previousTitles.includes(title)) {
-        setFavArray(previousTitles.filter((name) => name !== title));
-        return previousTitles.filter((name) => name !== title);
-      } else {
-        setFavArray([...previousTitles, title]);
-        return [...previousTitles, title];
-      }
-    });
+    setSelectedTitle(!selectedTitle);
+    if (
+      JSON.parse(localStorage.getItem("FavoriteNames") || "[]").includes(title)
+    ) {
+      localStorage.setItem(
+        "FavoriteNames",
+        JSON.stringify(
+          JSON.parse(localStorage.getItem("FavoriteNames") || "[]").filter(
+            (name: string) => name !== title
+          )
+        )
+      );
+    } else {
+      localStorage.setItem(
+        "FavoriteNames",
+        JSON.stringify([
+          ...JSON.parse(localStorage.getItem("FavoriteNames") || "[]"),
+          title,
+        ])
+      );
+    }
   };
 
   if (load) {
@@ -121,7 +132,7 @@ const Seasons = () => {
           Choose Season:
           {selectSeason.map(({ season, title }) => {
             return (
-              <option key={title} value={season}>
+              <option key={`${title}${season}`} value={season}>
                 Season {season}
               </option>
             );
@@ -140,14 +151,23 @@ const Seasons = () => {
                       S{seasonOption} Ep{episode}:{" "}
                     </span>
                     {title}
-                    <span
+                    <div
                       className={`favorite ${
-                        selectedTitle.includes(title) ? "favEpisodePath" : ""
+                        JSON.parse(
+                          localStorage.getItem("FavoriteNames") || "[]"
+                        ).includes(title)
+                          ? "favEpisodePath"
+                          : ""
                       }`}
                       onClick={() => favEpisode(title)}
                     >
-                      <PiCloverBold />
-                    </span>
+                      <h3>
+                        Favorite:{" "}
+                        <span>
+                          <PiCloverBold />
+                        </span>{" "}
+                      </h3>
+                    </div>
                   </h2>
                   <p>{description}</p>
                   <div className="audioPlayer">
