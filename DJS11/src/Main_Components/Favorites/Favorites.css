@@ -1,7 +1,7 @@
 .titleSorting {
   text-align: center;
 }
-.titleSorting h1 {
+.titleSorting h2 {
   color: #55cddb;
   cursor: pointer;
   -webkit-user-select: none;
@@ -10,11 +10,15 @@
   align-items: center;
   justify-content: center;
 }
-.titleSorting h1 span {
+.titleSorting h2 span {
   padding-top: 9px;
   align-self: center;
 }
 
-.titleSorting h1:hover {
+.titleSorting h2:hover {
   text-decoration: underline;
+}
+
+li {
+  padding: 0.3rem;
 }

@@ -63,17 +63,49 @@
 .email:hover {
   color: var(--melon) !important;
 }
+
 .podcastImage {
-  display: flex;
-  align-items: center;
-  border-radius: 5px;
-  margin: 0.8rem;
-  transition: all 0.2s ease-in-out;
   background-color: transparent;
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  max-width: 1200px;
+  overflow-x: hidden;
+}
+
+@media (max-width: 768px) {
+  .podcastImage {
+    flex-direction: column;
+    overflow-x: auto;
+  }
+  .podcastImage > * {
+    flex: 1 1 auto;
+  }
+
+  @media (max-width: 480px) {
+    .podcastImage {
+      flex-direction: column;
+      padding: 10px;
+    }
+    .podcastImage > * {
+      flex: 1 1 100%;
+    }
+  }
+}
+
+.podcastImage > * {
+  text-align: center;
+  margin: 10px;
+}
+.podcastImage > img {
+  text-align: center;
+  width: 20rem;
+  margin: 10px;
 }
 
 .podcastImage img {
-  height: 20rem;
+  height: 15rem;
   border-radius: 5px;
   margin-right: 2rem;
 }

@@ -12,7 +12,11 @@ const Favorites = () => {
     localStorage.getItem("FavoriteNames") || "[]"
   );
   // const removeTitle = () => {};
-  const titles = favoriteNames.map((names) => <h2 key={names}>{names}</h2>);
+  const titles = favoriteNames.map((names) => (
+    <ul key={names}>
+      <li>{names}</li>
+    </ul>
+  ));
   const sortTitles = () => {
     const sortedTitle = [...favoriteNames.map((names) => names)].sort((a, b) =>
       toggleOrder ? a.localeCompare(b) : b.localeCompare(a)
@@ -25,13 +29,13 @@ const Favorites = () => {
   if (!localStorage.getItem("FavoriteNames")) {
     return <h1>NO FAVORITES!</h1>;
   }
-  console.log(storageBoolean);
   return (
     <div className="titleSorting">
-      <h1 onClick={sortTitles}>
+      <h2 onClick={sortTitles}>
         Favorite Title Names:
         <span>{!storageBoolean ? <FaSortAlphaDown /> : <FaSortAlphaUp />}</span>
-      </h1>
+      </h2>
+      <hr />
       {titles}
     </div>
   );
