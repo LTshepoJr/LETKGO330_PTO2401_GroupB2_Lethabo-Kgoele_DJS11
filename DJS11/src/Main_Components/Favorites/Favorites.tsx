@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FaSortAlphaDown, FaSortAlphaUp } from "react-icons/fa";
+import "./Favorites.css";
 
 const Favorites = () => {
   // const favNames: string[] = JSON.parse(
@@ -39,7 +40,7 @@ const Favorites = () => {
   const favoriteNames: string[] = JSON.parse(
     localStorage.getItem("FavoriteNames") || "[]"
   );
-  const titles = favoriteNames.map((names) => <h1 key={names}>{names}</h1>);
+  const titles = favoriteNames.map((names) => <h2 key={names}>{names}</h2>);
   const sortTitles = () => {
     const sortedTitle = [...favoriteNames.map((names) => names)].sort((a, b) =>
       toggleOrder ? a.localeCompare(b) : b.localeCompare(a)
@@ -54,13 +55,13 @@ const Favorites = () => {
   }
   console.log(storageBoolean);
   return (
-    <>
+    <div className="titleSorting">
       <h1 onClick={sortTitles}>
         Favorite Title Names:
         <span>{!storageBoolean ? <FaSortAlphaDown /> : <FaSortAlphaUp />}</span>
       </h1>
       {titles}
-    </>
+    </div>
   );
 };
 

@@ -1,0 +1,20 @@
+.titleSorting {
+  text-align: center;
+}
+.titleSorting h1 {
+  color: purple;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.titleSorting h1 span {
+  padding-top: 9px;
+  align-self: center;
+}
+
+.titleSorting h1:hover {
+  text-decoration: underline;
+}
