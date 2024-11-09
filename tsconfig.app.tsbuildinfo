@@ -1,0 +1,17 @@
+{
+  "root": [
+    "./src/app.tsx",
+    "./src/pagenotfound.tsx",
+    "./src/main.tsx",
+    "./src/vite-env.d.ts",
+    "./src/main_components/footer.tsx",
+    "./src/main_components/header.tsx",
+    "./src/main_components/mainbody.tsx",
+    "./src/main_components/mainpage.tsx",
+    "./src/main_components/favorites/favorites.tsx",
+    "./src/main_components/genres/genres.tsx",
+    "./src/main_components/podcast/podcast.tsx",
+    "./src/main_components/seasons/seasons.tsx"
+  ],
+  "version": "5.6.3"
+}
