@@ -176,6 +176,8 @@ footer {
 .podcastWrapper {
   color: unset;
   text-decoration: unset;
+  border-bottom: 1px solid var(--norm-color);
+  border-radius: 0.8rem;
 }
 
 .singlePodcast {
@@ -191,6 +193,15 @@ footer {
 
 .singlePodcast:hover {
   background-color: var(--mountbatten-pink);
+}
+
+.dateUpdated {
+  text-align: center;
+}
+
+.dateUpdated:hover {
+  text-decoration: underline;
+  text-align: center;
 }
 
 .singlePodcast > img {
@@ -231,7 +242,7 @@ footer {
 
 @media (max-width: 768px) {
   .buttons {
-    flex-direction: column;
+    flex-wrap: wrap;
     overflow-x: auto;
   }
   .genreType {
@@ -241,7 +252,7 @@ footer {
 
 @media (max-width: 480px) {
   .buttons {
-    flex-direction: column;
+    flex-wrap: wrap;
     padding: 10px;
   }
   .genreType {
@@ -280,5 +291,10 @@ footer {
 
 .about h2 {
   padding-bottom: 0.4rem;
+  text-decoration: underline;
+}
+
+.filterName {
+  text-align: center;
   text-decoration: underline;
 }

@@ -28,6 +28,9 @@ const Podcast = () => {
     "Kids and Family",
   ];
   const type = genreArray[location.state?.type - 1] || "all";
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
   useEffect(() => {
     setLoad(true);

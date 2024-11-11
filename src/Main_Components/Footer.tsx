@@ -1,7 +1,8 @@
 import { CSSProperties } from "react";
 import { AiFillHome } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
-import { PiVisorThin, PiCloverBold } from "react-icons/pi";
+import { IoIosStar } from "react-icons/io";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 const Footer = () => {
   const active = {
@@ -34,7 +35,7 @@ const Footer = () => {
             isActive ? (active as CSSProperties) : undefined
           }
         >
-          <PiVisorThin />
+          <GiHamburgerMenu />
         </NavLink>
         <NavLink
           className="btn"
@@ -45,7 +46,7 @@ const Footer = () => {
             isActive ? (active as CSSProperties) : undefined
           }
         >
-          <PiCloverBold />
+          <IoIosStar />
         </NavLink>
       </footer>
     </>

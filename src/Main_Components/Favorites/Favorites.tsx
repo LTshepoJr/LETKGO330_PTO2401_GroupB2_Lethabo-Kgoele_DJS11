@@ -1,8 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaSortAlphaDown, FaSortAlphaUp } from "react-icons/fa";
 import "./Favorites.css";
+import { useLocation } from "react-router-dom";
 
 const Favorites = () => {
+  const location = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
   const storageBoolean = JSON.parse(
     localStorage.getItem("Toggle Order") || "true"
   );

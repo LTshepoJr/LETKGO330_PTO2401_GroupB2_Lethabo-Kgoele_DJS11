@@ -3,6 +3,7 @@
   --grey: #333;
   --redwood: #933b2d;
   --light-blue: #55cddb;
+  --yellow-favorite: #dfdf21;
   --melon: #f7a598ff;
   --padding-inline: 0.3rem 1.3rem;
   --font-Lato: "Lato", sans-serif;
@@ -12,6 +13,10 @@
 .seasonContainer,
 .filteredSeason {
   padding: var(--padding-inline);
+}
+
+.podHead {
+  text-decoration: underline;
 }
 .audioPlayer {
   padding: 1rem 0rem;
@@ -64,12 +69,21 @@
   cursor: pointer;
   transition: all 0.3s ease;
   padding-top: 0.5rem;
+  display: flex;
+  align-items: center;
 }
+
+.favorite h3 > span {
+  margin-top: 4px;
+  padding-left: 4px;
+}
+
 .favorite h3:hover {
-  font-size: x-large;
+  text-decoration: underline;
 }
+
 .favEpisodePath {
-  color: var(--melon);
+  color: var(--yellow-favorite);
 }
 
 .episodeBlock {

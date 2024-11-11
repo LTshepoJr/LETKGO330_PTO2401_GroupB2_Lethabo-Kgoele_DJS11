@@ -1,7 +1,7 @@
 import { useOutletContext } from "react-router-dom";
 import "./Seasons.css";
 import { ChangeEvent, useEffect, useState } from "react";
-import { PiCloverBold } from "react-icons/pi";
+import { IoIosStar } from "react-icons/io";
 const Seasons = () => {
   interface Seasons {
     episodes: Episodes[];
@@ -142,7 +142,7 @@ const Seasons = () => {
         {filteredSeason.map(({ title, image, episodes }) => (
           <div key={title}>
             <img src={image} alt={`${title} Picture`} width="150rem" />
-            <h1>{title}</h1>
+            <h1 className="podHead">{title}</h1>
             <div className="episodeBlock">
               {episodes.map(({ description, title, episode, file }) => (
                 <div key={title}>
@@ -163,9 +163,9 @@ const Seasons = () => {
                     onClick={() => favEpisode(title)}
                   >
                     <h3>
-                      Favorite:{" "}
+                      Set as Favorite:{" "}
                       <span>
-                        <PiCloverBold />
+                        <IoIosStar />
                       </span>{" "}
                     </h3>
                   </div>

@@ -28,6 +28,9 @@ const MainBody = () => {
   const [error, setError] = useState(null);
   const [type, setType] = useSearchParams();
   const typeFilter = type.get("type");
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [typeFilter]);
 
   useEffect(() => {
     setLoad(true);
@@ -113,7 +116,21 @@ const MainBody = () => {
     setActiveSort("sort");
   };
 
-  const pod = newDateArray.map(({ image, id, title }) => {
+  const genreArray: string[] = [
+    "Personal Growth",
+    "Investigative Journalism",
+    "History",
+    "Comedy",
+    "Entertainment",
+    "Business",
+    "Fiction",
+    "News",
+    "Kids and Family",
+  ];
+  function sliceDate<T extends string>(updated: T) {
+    return updated.slice(0, updated.indexOf("T"));
+  }
+  const pod = newDateArray.map(({ image, id, title, updated }) => {
     return (
       <Link
         to={id}
@@ -125,9 +142,121 @@ const MainBody = () => {
           <img src={image} alt={`${title} Picture`} />
           <h4>{updateTitle(title)}</h4>
         </div>
+        <h4 className="dateUpdated">Updated: {sliceDate(updated)}</h4>
       </Link>
     );
   });
+
+  const filterFlex = window.matchMedia("(max-width: 480px)");
+  const filterName = genreArray[Number(typeFilter) - 1] || "";
+
+  if (typeFilter && filterFlex.matches) {
+    return (
+      <>
+        <h1 className="filterName">{filterName}</h1>
+        <div className="about">
+          {typeFilter ? <h2>About</h2> : null}
+          {typeFilter ? (
+            <>
+              <p>{filterDes}</p>
+              <br />
+              <hr />
+            </>
+          ) : null}
+        </div>
+        <div className="sortingSection">
+          <div onClick={sortTitleArray}>
+            <h2>
+              Sort Title
+              {toggleOrder ? <FaSortAlphaDown /> : <FaSortAlphaUp />}
+            </h2>
+          </div>
+          <div onClick={sortTitleDateArray}>
+            <h2>
+              Sort Date:
+              {!toggleDateOrder ? " Latest" : " Oldest"}
+              {toggleDateOrder ? <RiSortNumberAsc /> : <RiSortNumberDesc />}
+            </h2>
+          </div>
+        </div>
+        <div className="preview">{pod}</div>
+        <div className="buttons">
+          <button
+            className={`genreType ${typeFilter === "1" ? "selected" : ""}`}
+            type="button"
+            onClick={() => handleFilterType("type", "1")}
+          >
+            Personal Growth
+          </button>
+          <button
+            className={`genreType ${typeFilter === "2" ? "selected" : ""}`}
+            type="button"
+            onClick={() => handleFilterType("type", "2")}
+          >
+            Investigative Journalism
+          </button>
+          <button
+            className={`genreType ${typeFilter === "3" ? "selected" : ""}`}
+            type="button"
+            onClick={() => handleFilterType("type", "3")}
+          >
+            History
+          </button>
+          <button
+            className={`genreType ${typeFilter === "4" ? "selected" : ""}`}
+            type="button"
+            onClick={() => handleFilterType("type", "4")}
+          >
+            Comedy
+          </button>
+          <button
+            className={`genreType ${typeFilter === "5" ? "selected" : ""}`}
+            type="button"
+            onClick={() => handleFilterType("type", "5")}
+          >
+            Entertainment
+          </button>
+          <button
+            className={`genreType ${typeFilter === "6" ? "selected" : ""}`}
+            type="button"
+            onClick={() => handleFilterType("type", "6")}
+          >
+            Business
+          </button>
+          <button
+            className={`genreType ${typeFilter === "7" ? "selected" : ""}`}
+            type="button"
+            onClick={() => handleFilterType("type", "7")}
+          >
+            Fiction
+          </button>
+          <button
+            className={`genreType ${typeFilter === "8" ? "selected" : ""}`}
+            type="button"
+            onClick={() => handleFilterType("type", "8")}
+          >
+            News
+          </button>
+          <button
+            className={`genreType ${typeFilter === "9" ? "selected" : ""}`}
+            type="button"
+            onClick={() => handleFilterType("type", "9")}
+          >
+            Kids and Family
+          </button>
+          {typeFilter ? (
+            <button
+              className={`genreType clear-filters`}
+              type="button"
+              onClick={() => handleFilterType("type", null)}
+            >
+              Clear Filter
+            </button>
+          ) : null}
+        </div>
+      </>
+    );
+  }
 
   if (load) {
     return <h1>Loading...</h1>;
