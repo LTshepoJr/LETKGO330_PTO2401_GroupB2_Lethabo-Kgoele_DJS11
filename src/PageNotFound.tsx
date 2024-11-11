@@ -4,7 +4,7 @@ import "./main.css";
 const PageNotFound = () => {
   return (
     <div className="returnHome">
-      <h1>Page not found...</h1>
+      <h1 className="jsonError">Page not found...</h1>
       <Link to="/" className="homeButton">
         Return to home page
       </Link>
