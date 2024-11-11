@@ -31,18 +31,6 @@ h6 {
   font-weight: 700;
 }
 
-/* 
-@media (min-width: 600px) {
-  .about-me {
-      display: grid;
-      grid-template-columns: 1fr 200px;
-      grid-template-areas: 
-          "title img"
-          "subtitle img"
-          "text img";
-      grid-column-gap: 2em;
-  } */
-
 .homeButton {
   font-family: var(--font-Lato);
   background: white;
