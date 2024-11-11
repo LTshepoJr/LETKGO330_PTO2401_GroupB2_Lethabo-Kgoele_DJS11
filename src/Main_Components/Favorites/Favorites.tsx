@@ -1,13 +1,10 @@
 import { useEffect, useState } from "react";
 import { FaSortAlphaDown, FaSortAlphaUp } from "react-icons/fa";
-import "./Favorites.css";
 import { useLocation } from "react-router-dom";
+import "./Favorites.css";
 
 const Favorites = () => {
   const location = useLocation();
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [location.pathname]);
   const storageBoolean = JSON.parse(
     localStorage.getItem("Toggle Order") || "true"
   );
@@ -16,7 +13,11 @@ const Favorites = () => {
   const favoriteNames: string[] = JSON.parse(
     localStorage.getItem("FavoriteNames") || "[]"
   );
-  // const removeTitle = () => {};
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   const titles = favoriteNames.map((names) => (
     <ul key={names}>
       <li>{names}</li>
@@ -34,6 +35,7 @@ const Favorites = () => {
   if (!localStorage.getItem("FavoriteNames")) {
     return <h1>NO FAVORITES!</h1>;
   }
+
   return (
     <div className="titleSorting">
       <h2 onClick={sortTitles}>

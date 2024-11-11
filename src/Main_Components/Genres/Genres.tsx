@@ -1,12 +1,14 @@
 import { Link, useLocation } from "react-router-dom";
-import "./Genres.css";
 import { useEffect } from "react";
+import "./Genres.css";
 
 const Genres = () => {
   const location = useLocation();
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
+
   return (
     <>
       <div className="Links">

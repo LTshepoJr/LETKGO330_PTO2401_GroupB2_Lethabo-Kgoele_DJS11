@@ -1,7 +1,8 @@
 import { useOutletContext } from "react-router-dom";
-import "./Seasons.css";
 import { ChangeEvent, useEffect, useState } from "react";
 import { IoIosStar } from "react-icons/io";
+import "./Seasons.css";
+
 const Seasons = () => {
   interface Seasons {
     episodes: Episodes[];
@@ -26,6 +27,7 @@ const Seasons = () => {
     title: string;
     updated: string;
   }
+
   const [endpoint, setEndpoint] = useState(0);
   const [load, setLoad] = useState(false);
   const [seasonOption, setSeasonOption] = useState("1");
@@ -47,6 +49,12 @@ const Seasons = () => {
     updated: "",
   });
   const outletPod: [] = useOutletContext();
+  const optionSeasons: OptionSeasons = seasons;
+  const selectSeason = optionSeasons.seasons;
+  const filteredSeason = selectSeason.filter(
+    ({ season }) => season === Number(seasonOption)
+  );
+  const [selectedTitle, setSelectedTitle] = useState(false);
 
   useEffect(() => {
     if (endpoint) {
@@ -64,18 +72,14 @@ const Seasons = () => {
     });
   }, [outletPod]);
 
-  const optionSeasons: OptionSeasons = seasons;
-  const selectSeason = optionSeasons.seasons;
-  const filteredSeason = selectSeason.filter(
-    ({ season }) => season === Number(seasonOption)
-  );
-
   const handleEventChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setSeasonOption(e.target.value);
   };
+
   const audioId = document.querySelectorAll(
     ".audioControls"
   ) as NodeListOf<HTMLAudioElement>;
+
   audioId.forEach((audio) =>
     audio.addEventListener("play", () => {
       audioId.forEach((playingAudio) => {
@@ -85,7 +89,6 @@ const Seasons = () => {
       });
     })
   );
-  const [selectedTitle, setSelectedTitle] = useState(false);
 
   const favEpisode = (title: string) => {
     setSelectedTitle(!selectedTitle);

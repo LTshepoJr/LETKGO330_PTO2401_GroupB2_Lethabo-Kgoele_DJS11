@@ -26,6 +26,7 @@ const Footer = () => {
         >
           <AiFillHome />
         </NavLink>
+
         <NavLink
           className="btn"
           id="genreBtn"
@@ -37,6 +38,7 @@ const Footer = () => {
         >
           <GiHamburgerMenu />
         </NavLink>
+
         <NavLink
           className="btn"
           id="favoritesBtn"
@@ -52,4 +54,5 @@ const Footer = () => {
     </>
   );
 };
+
 export default Footer;

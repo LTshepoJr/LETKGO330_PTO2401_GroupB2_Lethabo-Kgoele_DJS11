@@ -18,16 +18,53 @@ const MainBody = () => {
   }
 
   const [podcast, setPodcast] = useState([]);
+  const [load, setLoad] = useState(false);
+  const [error, setError] = useState(null);
+  const [type, setType] = useSearchParams();
+  const [toggleOrder, setToggleOrder] = useState(true);
+  const [toggleDateOrder, setToggleDateOrder] = useState(false);
+  const [activeSort, setActiveSort] = useState<string | null>(null);
   const [description, setDescription] = useState<Description>({
     id: 0,
     title: "",
     description: "",
     shows: [""],
   });
-  const [load, setLoad] = useState(false);
-  const [error, setError] = useState(null);
-  const [type, setType] = useSearchParams();
   const typeFilter = type.get("type");
+  const filterDes = description.description;
+  const filteredPodcast = podcast.filter(({ genres }) => {
+    const genre: number[] = genres;
+    if (genre.includes(Number(typeFilter))) {
+      return genre;
+    }
+  });
+  const filterPod = typeFilter ? filteredPodcast : podcast;
+  const titleArray: titleSort[] = filterPod;
+  const newDateArray = [...titleArray].sort((a, b) => {
+    if (toggleDateOrder) {
+      const dateA = new Date(a.updated.slice(0, 10)).getTime();
+      const dateB = new Date(b.updated.slice(0, 10)).getTime();
+      return dateA - dateB;
+    } else {
+      const dateA = new Date(a.updated.slice(0, 10)).getTime();
+      const dateB = new Date(b.updated.slice(0, 10)).getTime();
+      return dateB - dateA;
+    }
+  });
+  const genreArray: string[] = [
+    "Personal Growth",
+    "Investigative Journalism",
+    "History",
+    "Comedy",
+    "Entertainment",
+    "Business",
+    "Fiction",
+    "News",
+    "Kids and Family",
+  ];
+  const filterFlex = window.matchMedia("(max-width: 480px)");
+  const filterName = genreArray[Number(typeFilter) - 1] || "";
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [typeFilter]);
@@ -38,7 +75,6 @@ const MainBody = () => {
       typeFilter
     )}`;
     const defaultUrl = "https://podcast-api.netlify.app/";
-
     const fetchPromises = typeFilter
       ? [
           fetch(defaultUrl).then((prom) => prom.json()),
@@ -59,7 +95,15 @@ const MainBody = () => {
       .finally(() => setLoad(false));
   }, [typeFilter]);
 
-  const filterDes = description.description;
+  if (activeSort === null) {
+    newDateArray.sort((a, b) =>
+      toggleOrder
+        ? a.title.localeCompare(b.title)
+        : b.title.localeCompare(a.title)
+    );
+  } else {
+    titleArray.sort((a, b) => a.title.localeCompare(b.title));
+  }
 
   function updateTitle<T extends string>(title: T) {
     return title.replace("&amp;", "&");
@@ -75,61 +119,20 @@ const MainBody = () => {
       return prev;
     });
   }
-
-  const filteredPodcast = podcast.filter(({ genres }) => {
-    const genre: number[] = genres;
-    if (genre.includes(Number(typeFilter))) {
-      return genre;
-    }
-  });
-
-  const filterPod = typeFilter ? filteredPodcast : podcast;
-  const titleArray: titleSort[] = filterPod;
-  const [toggleOrder, setToggleOrder] = useState(true);
-  const [toggleDateOrder, setToggleDateOrder] = useState(false);
-  const [activeSort, setActiveSort] = useState<string | null>(null);
-  titleArray.sort((a, b) => a.title.localeCompare(b.title));
-  const newDateArray = [...titleArray].sort((a, b) => {
-    if (toggleDateOrder) {
-      const dateA = new Date(a.updated.slice(0, 10)).getTime();
-      const dateB = new Date(b.updated.slice(0, 10)).getTime();
-      return dateA - dateB;
-    } else {
-      const dateA = new Date(a.updated.slice(0, 10)).getTime();
-      const dateB = new Date(b.updated.slice(0, 10)).getTime();
-      return dateB - dateA;
-    }
-  });
-  if (activeSort === "sort") {
-    newDateArray.sort((a, b) =>
-      toggleOrder
-        ? a.title.localeCompare(b.title)
-        : b.title.localeCompare(a.title)
-    );
-  }
   const sortTitleDateArray = () => {
     setToggleDateOrder(!toggleDateOrder);
-    setActiveSort(null);
-  };
-  const sortTitleArray = () => {
-    setToggleOrder(!toggleOrder);
     setActiveSort("sort");
   };
 
-  const genreArray: string[] = [
-    "Personal Growth",
-    "Investigative Journalism",
-    "History",
-    "Comedy",
-    "Entertainment",
-    "Business",
-    "Fiction",
-    "News",
-    "Kids and Family",
-  ];
+  const sortTitleArray = () => {
+    setActiveSort(null);
+    setToggleOrder(!toggleOrder);
+  };
+
   function sliceDate<T extends string>(updated: T) {
     return updated.slice(0, updated.indexOf("T"));
   }
+
   const pod = newDateArray.map(({ image, id, title, updated }) => {
     return (
       <Link
@@ -146,9 +149,6 @@ const MainBody = () => {
       </Link>
     );
   });
-
-  const filterFlex = window.matchMedia("(max-width: 480px)");
-  const filterName = genreArray[Number(typeFilter) - 1] || "";
 
   if (typeFilter && filterFlex.matches) {
     return (

@@ -100,23 +100,23 @@
     width: 10rem;
     margin: 10px;
   }
+}
 
-  @media (max-width: 480px) {
-    .podcastImage {
-      flex-direction: column;
-      padding: 10px;
-    }
-    .podcastImage > * {
-      flex: 1 1 100%;
-    }
-    .podcastImage > img {
-      text-align: center;
-      width: 10rem;
-      margin: 10px;
-    }
-    .podcastImage > h1 {
-      font-size: larger;
-    }
+@media (max-width: 480px) {
+  .podcastImage {
+    flex-direction: column;
+    padding: 10px;
+  }
+  .podcastImage > * {
+    flex: 1 1 100%;
+  }
+  .podcastImage > img {
+    text-align: center;
+    width: 10rem;
+    margin: 10px;
+  }
+  .podcastImage > h1 {
+    font-size: larger;
   }
 }
 
