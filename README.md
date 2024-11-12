@@ -1,181 +1,114 @@
-# 🎵 PODCAST APP | PORTFOLIO PIECE 💿
+# The Voice Pod
 
-[DJS11] Starter Instructions for the Final Portfolio Piece Submission 🚀
+![Project Logo](https://media.istockphoto.com/id/1283532997/vector/podcast-concept-thin-line-icon-abstract-icon-abstract-gradient-background-modern-sound-wave.jpg?s=612x612&w=0&k=20&c=YLg7rHeSuYqeIuGRAcvf2a7J8X8Sx-IkmqYHXIJGPYQ=)
 
-<!-- omit in toc -->
+## Table of Contents
 
-**Table of Contents**
+1. [Introduction](#introduction)
+2. [Features](#features)
+3. [Technologies](#technologies)
+4. [Getting Started](#getting-started)
+5. [Installation](#installation)
+6. [Usage](#usage)
+7. [Project Structure](#project-structure)
+8. [Contributing](#contributing)
+9. [Contact](#contact)
 
-- [🤖 Technology](#-technology)
-- [📦Data](#data)
-  - [Relationships](#relationships)
-  - [Endpoints](#endpoints)
-  - [Genre Titles](#genre-titles)
-- [🧑 User Stories](#user-stories)
+---
 
-## 🤖 Technology
+## Introduction
 
-**You will be required to complete this project using React and a build-process to manage all the complexity involved.**
+[**The Voice Pod**](https://effervescent-nasturtium-f7b697.netlify.app/) is an advanced, fully responsive web application using **React**, with **TypeScript** for the dynamic and reusable components, and **CSS** for the project's styling. The reliability of code will be ensured by using **TypeScript**, which uses type-checking, while the style will be encapsulated using **CSS** modules. Therefore, the overall result is an application scalable, maintainable, and user-friendly that can be taken as boilerplate and put to use by any web developer who decides to implement this or a similar project.
 
-You are welcome to use any other technology that you are comfortable with as well as React. It is recommended that you use TypeScript as well, however you are welcome to avoid TypeScript entirely if you do not feel comfortable with it’s usage just yet.
+## Features
 
-## 📦Data
+- **Modular Design**: Components are designed for reusability and scalability.
+- **TypeScript Integration**: Type safety and autocompletion help prevent runtime errors.
+- **Customizable Styling**: CSS modules and custom themes for flexibility.
+- **Responsive Layout**: Adapts to various screen sizes for a seamless user experience.
+- **Error Handling**: Basic error handling and user notifications.
 
-**Data consists of three basic semantic units**
+## Technologies
 
-- `SHOW`: A specific podcast that contains a single or several `SEASON`
-- `SEASON`: A collection of `EPISODE` released across a specific timespan
-- `EPISODE`: Corresponds to a specific MP3 file that user can listen
+- **React**: JavaScript library for building UI components
+- **TypeScript**: JavaScript with syntax for types
+- **CSS Modules**: Scoped and reusable CSS for each component
+- **Fetch API** for HTTP requests
 
-However, the following information is also exposed via the API
+## Getting Started
 
-- `PREVIEW`: A summarised version of a `SHOW` that only contains basic information. Usually exposed when an array of different `SHOW` information is requested.
-- `GENRE`: Information related to a (one of many) genres that can be assigned to a `SHOW`
+### Prerequisites
 
-### Relationships
+- **Node.js** (v14 or above)
+- **npm**
 
-The following chart indicates the relations between units of data. It uses Entity Relationship mapping. In order to understand the meaning of symbols in the chart please read [the overview on the Mermaid.js documentation](https://mermaid.js.org/syntax/entityRelationshipDiagram.html).
+### Contributing
 
-Note that the text between the units indicates what properties map to one another. It is separated by means of three underscores (`___`). The value before the underscores is the mapping from the parent object, whereas the values after the underscore is the mapping from the child object.
+Want to contribute? Great!
 
-_Note that is some cases there is no way to infer the parent from the child itself , in those cases just the parent map is noted, with no value after the underscores_.
+The Voice Pod is easy to contribute with, Just fork the repository and follow the installation section😊
 
-```mermaid
-erDiagram
+Open your favorite Terminal and run these commands.
 
-PREVIEW {
-    number id
-    string title
-    string description
-		number seasons
-		string image
-		array genreIds
-		updated string
-}
+## Usage
 
-SHOW {
-    number id
-    string title
-    string description
-		array seasons
-}
+### Installation
 
-SEASON {
-  number id
-	string title
-	string image
-	array episodes
-}
+The Voice Pod requires [Node.js](https://nodejs.org/) v14+ to run.
+Install the dependencies and devDependencies and start the server.
 
-EPISODE {
-	number id
-	string file
-	string title
-}
+After forking the repository:
 
-GENRE {
-	number id
-	string title
-	string description
-	array showIds
-}
+Run Local Host:
 
-PREVIEW ||--|| SHOW: id___id
-PREVIEW }|--|{ GENRE: genreIds___showIds
-SHOW }|--|{ GENRE: genreIds___showIds
-SHOW ||--|{ SEASON: seasons___
-SEASON ||--|{ EPISODE: episodes___
-
+```terminal
+npm install
+npm run build
+npm run dev
 ```
 
-### Endpoints
+## Project Structure
 
-Data can be called via a `fetch` request to the following three endpoints. Note that there is not always a one-to-one mapping between endpoints and actual data structures. Also note that **\*`<ID>`** indicates where the dynamic ID for the requested item should be placed. For example: `[https://podcast-api.netlify.app/genre/3](https://podcast-api.netlify.app/genre/3)`\*
+- **project-root/** - Main project directory
+- **public/** - Public assets and files (served directly)
+- **src/** - Core source code & Reusable UI components
+  - **Main_Components/** - Reusable UI components
+    - **Favorites/** - A directory dedicated to the "Favorites" feature of the application, containing components and styles for displaying and managing users' favorite title or content.
+      - **Favorites.css** - A CSS file dedicated to styling the "Favorites" feature or section of the application, containing custom styles related to Favorite component.
+      - **Favorites.tsx** - A TypeScript React component responsible for rendering the "Favorites" section of the application, including logic and UI for displaying and managing Favorites.
+    - **genres/** - A directory containing components and styling related to handling different genres within the application, such as individual genre pages, genre-specific styling.
+      - **Genres.css** - A CSS file dedicated to styling the "Genres" feature or section of the application, containing custom styles related to Genres component.
+      - **Genres.tsx** - A TypeScript React component responsible for rendering the "Genres" section of the application, including logic and UI for displaying and managing Genres.
+    - **Podcast/** - A directory focused on the "Podcast" feature of the application, containing components and styles for displaying and managing podcast-related content.
+      - **Podcast.css** - A CSS file dedicated to styling the "Podcast" feature or section of the application, containing custom styles related to Podcast component.
+      - **Podcast.tsx** - A TypeScript React component responsible for rendering the "Podcast" section of the application, including logic and UI for displaying and managing Podcasts.
+    - **Seasons/** - A directory dedicated to managing the "Seasons" feature of the application, containing components and styles for displaying and organizing seasonal content and series of episodes.
+      - **Seasons.css** - A CSS file dedicated to styling the "Seasons" feature or section of the application, containing custom styles related to Seasons component.
+      - **Seasons.tsx** - A TypeScript React component responsible for rendering the "Seasons" section of the application, including logic and UI for displaying and managing Seasons.
+    - **Footer.tsx** - A TypeScript React component that renders the footer section of the application, typically containing navigation links.
+    - **Header.tsx** - A TypeScript React component responsible for rendering the header section of the application, containing header of the podcast.
+    - **MainBody.tsx** - A TypeScript React component that renders the main content area of the application, containing the core content and components displayed on each page.
+    - **mainComp.css** - A CSS file dedicated to styling the "main components" feature or section of the application, containing custom styles related to main components.
+    - **MainBody.tsx** - A TypeScript React component that renders the main content area of the application, containing the core content and components displayed on each page.
+  - **App.tsx** - Browser Router & Importing of Components
+  - **main.css** - CSS styling applied to all components (Imported in main.tsx)
+  - **main.tsx** - Entry point
+  - **PageNotFound.tsx** - Component for when endpoint does not match any path
+- **.gitignore** - Specifies files ignored by Git
+- **eslint.config.js** - ESLint configuration file for defining code style, rules, and linting behavior across the project.
+- **index.html** - The main HTML file that serves as the entry point for the application.
+- **package-lock.json** - Automatically generated file that locks the versions of dependencies installed in the project, ensuring consistent installs across different environments.
+- **package.json** - Project metadata and dependencies
+- **ProjectInstructions.md** - A detailed guide containing instructions, setup steps, and usage guidelines specific to the project.
+- **README.md** - Project documentation
+- **tsconfig.app.json** - A TypeScript configuration file specific to the application, defining compiler options, file inclusions, and TypeScript settings for the app's source code.
+- **tsconfig.app.tsbuildinfo** - A TypeScript incremental compilation file generated automatically to store information about previous builds, improving build performance by reusing unchanged code.
+- **tsconfig.json** - The main TypeScript configuration file that defines global compiler options and settings for the entire project, such as target JavaScript version, module resolution, and file inclusions/exclusions.
+- **tsconfig.node.json** - A TypeScript configuration file tailored for Node.js-specific settings, defining compiler options and module resolutions suitable for server-side code.
+- **tsconfig.node.tsbuildinfo** - An automatically generated TypeScript file that stores incremental build information for Node.js-specific code, enabling faster rebuilds by tracking unchanged files.
+- **vite.config.ts** - The Vite configuration file, written in TypeScript, that defines build and development settings for the Vite bundler, such as plugins, server options, and build optimizations.
 
-| URL                                          |                                                                                        |
-| -------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `https://podcast-api.netlify.app`            | Returns an array of PREVIEW                                                            |
-| `https://podcast-api.netlify.app/genre/<ID>` | Returns a GENRE object                                                                 |
-| `https://podcast-api.netlify.app/id/<ID>`    | Returns a SHOW object with several SEASON and EPISODE objects directly embedded within |
+  ## Contact
 
-### Genre Titles
-
-Since genre information is only exposed on `PREVIEW` by means of the specific `GENRE` id, it is recommended that you include the mapping between genre id values and title in your code itself:
-
-| ID  | Title                    |
-| --- | ------------------------ |
-| 1   | Personal Growth          |
-| 2   | Investigative Journalism |
-| 3   | History                  |
-| 4   | Comedy                   |
-| 5   | Entertainment            |
-| 6   | Business                 |
-| 7   | Fiction                  |
-| 8   | News                     |
-| 9   | Kids and Family          |
-
-## 🧑 User Stories
-
-Please refer to the DJS rubric found in your dashboard spreadsheet for more detail.
-
-# CORE PROJECT REQUIREMENTS ✅
-
-| CODE  | CATEGORY                           | USER STORIES                                                                                                                                                                                                   | DIFFICULTY | TOTAL |
-| ----- | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | ----- |
-| P3.1  | Setup and Deployment               | Project is deployed to a custom Netlify URL                                                                                                                                                                    | Medium     | 2     |
-| P3.2  |                                    | User sees a custom icon in the tab window. All favicon information has been created an added correctly via realfavicongenerator.net                                                                            | Easy       | 1     |
-| P3.3  |                                    | Metatag information has been created and added via metatags.io. Be mindful to manually replace all URL values (especially image URL) to absolute Netlify URL values (you will need to deploy to Netlify first) | Easy       | 1     |
-| P3.4  | UI/UX                              | User sees the name of all available shows on the platform                                                                                                                                                      | Easy       | 1     |
-| P3.5  |                                    | User sees shows sorted alphabetically when the app loads (default sorting)                                                                                                                                     | Hard       | 3     |
-| P3.6  |                                    | User has a way to listen to any episode in a season for a show (note there is a single placeholder audio track for all shows)                                                                                  | Medium     | 2     |
-| P3.7  |                                    | User is able to see a view where only episodes for a specific selected season are shown (Note that this can be a page view, a modal, or toggle dropdown - up to developer's design choice)                     | Medium     | 2     |
-| P3.8  |                                    | User is able to toggle between different seasons for the same show                                                                                                                                             | Hard       | 3     |
-| P3.9  |                                    | User sees preview image of shows when browsing                                                                                                                                                                 | Easy       | 1     |
-| P3.10 |                                    | User sees the amount of seasons as a number in a show when browsing                                                                                                                                            | Easy       | 1     |
-| P3.11 |                                    | User sees a human-readable date to when a show was last updated                                                                                                                                                | Easy       | 1     |
-| P3.12 |                                    | User sees what genres (as genre titles) a show is associated with when browsing                                                                                                                                | Medium     | 2     |
-| P3.13 |                                    | User sees a preview image of seasons for a specific show (Note some Shows have different images for each Season)                                                                                               | Easy       | 1     |
-| P3.14 |                                    | User sees the amount of episodes as a number for a season                                                                                                                                                      | Easy       | 1     |
-| P3.15 |                                    | User is able to go back to a show view from a season-specific view                                                                                                                                             | Easy       | 1     |
-| P3.16 | Data Fetching and State Management | All show data loaded via a fetch call from the API (Note no podcast data should be hardcoded in the application)                                                                                               | Medium     | 2     |
-| P3.17 |                                    | When viewing a specific show, data is loaded via fetch from individual show endpoint                                                                                                                           | Medium     | 2     |
-| P3.18 |                                    | There is a loading state while initial data is being loaded                                                                                                                                                    | Medium     | 2     |
-| P3.19 |                                    | There is a loading state while new data is being loaded                                                                                                                                                        | Hard       | 3     |
-| P3.20 | User Interaction                   | User is able to mark specific episodes as favourites so that they can find them again (Note the requirement is that a specific episode of a specific season of a specific show is to be favourited)            | Hard       | 3     |
-| P3.21 |                                    | User can visit a view where they see all their favourite episode                                                                                                                                               | Hard       | 3     |
-| P3.22 |                                    | User is able to see the associated show and season when an episode is in favourites                                                                                                                            | Hard       | 3     |
-| P3.23 |                                    | Related by season/show episodes are grouped together in favourites                                                                                                                                             | Hard       | 3     |
-| P3.24 |                                    | User is able to remove episodes from their favourites                                                                                                                                                          | Medium     | 2     |
-| P3.25 |                                    | User sees the date and time that they added something as a favourite                                                                                                                                           | Medium     | 2     |
-| P3.26 |                                    | User is able to arrange favourites based on title from A-Z                                                                                                                                                     | Medium     | 2     |
-| P3.27 |                                    | User is able to arrange favourites based on title from Z-A                                                                                                                                                     | Medium     | 2     |
-| P3.28 |                                    | User is able to arrange favourites starting with the most recently updated                                                                                                                                     | Medium     | 2     |
-| P3.29 |                                    | User is able to arrange favourites starting with the furthest back updated                                                                                                                                     | Medium     | 2     |
-| P3.30 |                                    | User is able to arrange lists of shows based on title from A-Z                                                                                                                                                 | Medium     | 2     |
-| P3.31 |                                    | User is able to arrange lists of shows based on title from Z-A                                                                                                                                                 | Medium     | 2     |
-| P3.32 |                                    | User is able to arrange list showing the most recently updated (Newly updated Shows)                                                                                                                           | Medium     | 2     |
-| P3.33 |                                    | User is able to arrange list of shows from least recently updated (Oldest updated Shows)                                                                                                                       | Medium     | 2     |
-| P3.34 |                                    | Audio player is always visible so that user can listen to episodes while browsing                                                                                                                              | Medium     | 2     |
-| P3.35 |                                    | Audio player must show listening progress                                                                                                                                                                      | Medium     | 2     |
-| P3.36 |                                    | User receives a notification that confirms they want to close the page when audio is playing                                                                                                                   | Medium     | 2     |
-| P3.37 |                                    | User can filter shows by genre                                                                                                                                                                                 | Hard       | 3     |
-| P3.38 | Persistence and Storage            | App remembers and shows what episodes user listened to all the way through.                                                                                                                                    | Hard       | 3     |
-| P3.39 |                                    | Favourites must be persisted in localStorage                                                                                                                                                                   | Hard       | 3     |
-| P3.40 |                                    | User has the option to "reset" all their progress, effectively removing their entire listening history. (Note marks are awarded only for "resetting" entire listening history)                                 | Hard       | 3     |
-| P3.41 | Overall Assessment                 | The project has a good appearance and Desktop layout when opened in a web browser.                                                                                                                             | Easy       | 3     |
-| P3.42 |                                    | The project is easy to navigate and interact with through a web browser.                                                                                                                                       | Easy       | 3     |
-| P3.43 |                                    | The project's commit history shows short and clear commit messages.                                                                                                                                            | Easy       | 3     |
-| P3.44 |                                    | The project displays well on different devices and all screen sizes, ensuring usability on tablets                                                                                                             | Hard       | 4     |
-| P3.45 |                                    | The README file includes a comprehensive introduction to the project, setup instructions, usage examples, and contact information.                                                                             | Easy       | 3     |
-| P3.46 |                                    | The project loads and functions without ANY bugs (Completed user stories possess no bugs whatsoever)                                                                                                           | Hard       | 4     |
-| P3.47 |                                    | Well organized project structure & clean readable code                                                                                                                                                         | Medium     | 3     |
-
-# STRETCH GOALS 💪
-
-| CODE  | CATEGORY            | USER STORIES                                                                                                | DIFFICULTY | TOTAL |
-| ----- | ------------------- | ----------------------------------------------------------------------------------------------------------- | ---------- | ----- |
-| P3.48 | Additional Features | The project has extra features that make for a good user-experience                                         | Hard       | 3     |
-| P3.49 |                     | User is presented with a sliding carousel of possible shows they might be interested in on the landing page | Hard       | 3     |
-| P3.50 |                     | User is able to filter shows based on title by means of a text input                                        | Hard       | 3     |
-| P3.51 |                     | User is able to find shows based on fuzzy matching of concepts                                              | Hard       | 3     |
-| P3.52 |                     | App displays the exact timestamp location of where they left off any episode                                | Hard       | 3     |
+  - LinkedIn: [LinkedIn](https://www.linkedin.com/in/lethabo-kgoele-7ab441319/)
+  - E-Mail: lethabotshepojr@gmail.com
