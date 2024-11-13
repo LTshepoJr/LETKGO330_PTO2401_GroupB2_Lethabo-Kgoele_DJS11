@@ -65,6 +65,8 @@ const Seasons = () => {
   const storageTitle: string[] = storageFav.map(({ title }) => {
     return title;
   });
+  const date = new Date();
+  const currentDate = date.toLocaleString();
 
   useEffect(() => {
     if (endpoint) {
@@ -111,6 +113,7 @@ const Seasons = () => {
               name: Season.title,
               season: filteredSeason.map(({ season }) => `Season ${season}`),
               episode: `Episode: ${episode}`,
+              date: currentDate,
             },
           },
         ])

@@ -9,6 +9,7 @@ const Favorites = () => {
     episode: string;
     name: string;
     season: string[];
+    date: string;
   }
 
   interface StorageInfo {
@@ -36,7 +37,6 @@ const Favorites = () => {
       localStorage.getItem("FavoriteNames") || "[]"
     ).filter((name: StorageInfo) => name.title !== `${title}`);
     localStorage.setItem("FavoriteNames", JSON.stringify(removedFav));
-    console.log(removedFav);
   };
 
   const sortTitles = () => {
@@ -51,7 +51,7 @@ const Favorites = () => {
   };
 
   const storageFavInfo = favoriteStorage.map(
-    ({ title, podcast: { episode, name, season } }) => {
+    ({ title, podcast: { episode, name, season, date } }) => {
       return (
         <li key={title}>
           <h3>{name}</h3>
@@ -64,6 +64,7 @@ const Favorites = () => {
               <MdDelete />
             </span>
           </h5>
+          <h6>Date added: {date}</h6>
         </li>
       );
     }
