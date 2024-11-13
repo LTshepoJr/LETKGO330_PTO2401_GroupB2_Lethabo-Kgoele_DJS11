@@ -5,16 +5,22 @@ import { MdDelete } from "react-icons/md";
 import "./Favorites.css";
 
 const Favorites = () => {
-  interface podcastStorage {
+  interface PodcastStorage {
     episode: string;
     name: string;
-    season: string[];
+    season: string;
+    date: string;
+  }
+
+  interface NewPodcastStorage {
+    episode: string;
+    name: string;
     date: string;
   }
 
   interface StorageInfo {
     title: string;
-    podcast: podcastStorage;
+    podcast: PodcastStorage;
   }
 
   const location = useLocation();
@@ -49,6 +55,33 @@ const Favorites = () => {
     setToggleOrder(!toggleOrder);
     localStorage.setItem("Toggle Order", JSON.stringify(toggleOrder));
   };
+  interface GroupedFavorites {
+    [title: string]: {
+      [season: string]: NewPodcastStorage[];
+    };
+  }
+  function groupFavoritesByShowAndSeason(favoritesArray: StorageInfo[]) {
+    return favoritesArray.reduce((grouped: GroupedFavorites, episode) => {
+      if (!grouped[episode.podcast.name]) {
+        grouped[episode.podcast.name] = {};
+      }
+
+      if (!grouped[episode.podcast.name][episode.podcast.season]) {
+        grouped[episode.podcast.name][episode.podcast.season] = [];
+      }
+
+      grouped[episode.podcast.name][episode.podcast.season].push({
+        name: episode.title,
+        episode: episode.podcast.episode,
+        date: episode.podcast.date,
+      });
+
+      return grouped;
+    }, {});
+  }
+
+  const groupedFavorites = groupFavoritesByShowAndSeason(favoriteStorage);
+  console.log(groupedFavorites);
 
   const storageFavInfo = favoriteStorage.map(
     ({ title, podcast: { episode, name, season, date } }) => {
@@ -77,7 +110,7 @@ const Favorites = () => {
   return (
     <div className="titleSorting">
       <h2 onClick={sortTitles}>
-        Favorite Title Names:
+        Favorite Episode Titles:
         <span>{!storageBoolean ? <FaSortAlphaDown /> : <FaSortAlphaUp />}</span>
       </h2>
       <hr />
