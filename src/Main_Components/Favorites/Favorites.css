@@ -2,6 +2,7 @@
   --norm-color: antiquewhite;
   --pale-dogwood: #f6d3c3ff;
   --mountbatten-pink: #967a8eff;
+  --uranian-blue: #b5d3f8ff;
 }
 
 .titleSorting {
@@ -28,6 +29,10 @@
 .titleSorting ul > li {
   padding: 0.3rem;
   list-style-type: none;
+  border-bottom: 1px solid var(--norm-color);
+  border-top: 1px solid var(--norm-color);
+  border-radius: 2rem;
+  margin: 1rem 0;
 }
 
 .titleSorting h3 {
@@ -44,9 +49,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: medium;
 }
 
 .titleSorting h5 > span {
   margin: 3px;
   font-size: 1.7rem;
+}
+.titleSorting h6 {
+  color: var(--uranian-blue);
+  font-size: small;
 }
