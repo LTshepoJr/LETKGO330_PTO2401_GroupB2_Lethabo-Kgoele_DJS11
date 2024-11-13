@@ -1,3 +1,9 @@
+:root {
+  --norm-color: antiquewhite;
+  --pale-dogwood: #f6d3c3ff;
+  --mountbatten-pink: #967a8eff;
+}
+
 .titleSorting {
   text-align: center;
 }
@@ -19,7 +25,28 @@
   text-decoration: underline;
 }
 
-li {
+.titleSorting ul > li {
   padding: 0.3rem;
   list-style-type: none;
+}
+
+.titleSorting h3 {
+  color: var(--pale-dogwood);
+  text-decoration: underline;
+  padding: 0.9rem 0;
+}
+
+.titleSorting h4 {
+  color: var(--mountbatten-pink);
+  padding-bottom: 0.3rem;
+}
+.titleSorting h5 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.titleSorting h5 > span {
+  margin: 3px;
+  font-size: 1.7rem;
 }

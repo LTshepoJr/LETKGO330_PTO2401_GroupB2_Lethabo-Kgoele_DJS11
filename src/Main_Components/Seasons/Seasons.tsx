@@ -28,6 +28,10 @@ const Seasons = () => {
     updated: string;
   }
 
+  interface StorageInfo {
+    title: string;
+  }
+
   const [endpoint, setEndpoint] = useState(0);
   const [load, setLoad] = useState(false);
   const [seasonOption, setSeasonOption] = useState("1");
@@ -55,6 +59,12 @@ const Seasons = () => {
     ({ season }) => season === Number(seasonOption)
   );
   const [selectedTitle, setSelectedTitle] = useState(false);
+  const storageFav: [] = JSON.parse(
+    localStorage.getItem("FavoriteNames") || "[]"
+  );
+  const storageTitle: string[] = storageFav.map(({ title }) => {
+    return title;
+  });
 
   useEffect(() => {
     if (endpoint) {
@@ -76,31 +86,18 @@ const Seasons = () => {
     setSeasonOption(e.target.value);
   };
 
-  const audioId = document.querySelectorAll(
-    ".audioControls"
-  ) as NodeListOf<HTMLAudioElement>;
-
-  audioId.forEach((audio) =>
-    audio.addEventListener("play", () => {
-      audioId.forEach((playingAudio) => {
-        if (audio !== playingAudio) {
-          playingAudio.pause();
-        }
-      });
-    })
-  );
-
-  const favEpisode = (title: string) => {
+  const favEpisode = (
+    title: string,
+    episode: number,
+    filteredSeason: Seasons[],
+    Season: OptionSeasons
+  ) => {
     setSelectedTitle(!selectedTitle);
-    if (
-      JSON.parse(localStorage.getItem("FavoriteNames") || "[]").includes(title)
-    ) {
+    if (storageTitle.includes(title)) {
       localStorage.setItem(
         "FavoriteNames",
         JSON.stringify(
-          JSON.parse(localStorage.getItem("FavoriteNames") || "[]").filter(
-            (name: string) => name !== title
-          )
+          storageFav.filter((pod: StorageInfo) => pod.title !== title)
         )
       );
     } else {
@@ -108,7 +105,14 @@ const Seasons = () => {
         "FavoriteNames",
         JSON.stringify([
           ...JSON.parse(localStorage.getItem("FavoriteNames") || "[]"),
-          title,
+          {
+            title,
+            podcast: {
+              name: Season.title,
+              season: filteredSeason.map(({ season }) => `Season ${season}`),
+              episode: `Episode: ${episode}`,
+            },
+          },
         ])
       );
     }
@@ -142,47 +146,47 @@ const Seasons = () => {
         </select>
       </div>
       <div className="filteredSeason">
-        {filteredSeason.map(({ title, image, episodes }) => (
-          <div key={title}>
-            <img src={image} alt={`${title} Picture`} width="150rem" />
-            <h1 className="podHead">{title}</h1>
-            <div className="episodeBlock">
-              {episodes.map(({ description, title, episode, file }) => (
-                <div key={title}>
-                  <h2>
-                    <span>
-                      S{seasonOption} Ep{episode}:{" "}
-                    </span>
-                    {title}
-                  </h2>
-                  <div
-                    className={`favorite ${
-                      JSON.parse(
-                        localStorage.getItem("FavoriteNames") || "[]"
-                      ).includes(title)
-                        ? "favEpisodePath"
-                        : ""
-                    }`}
-                    onClick={() => favEpisode(title)}
-                  >
-                    <h3>
-                      Set as Favorite:{" "}
+        {filteredSeason.map(({ title, image, episodes }) => {
+          return (
+            <div key={title}>
+              <img src={image} alt={`${title} Picture`} width="150rem" />
+              <h1 className="podHead">{title}</h1>
+              <div className="episodeBlock">
+                {episodes.map(({ description, title, episode, file }) => (
+                  <div key={title}>
+                    <h2>
                       <span>
-                        <IoIosStar />
-                      </span>{" "}
-                    </h3>
+                        S{seasonOption} Ep{episode}:{" "}
+                      </span>
+                      {title}
+                    </h2>
+                    <div
+                      className={`favorite ${
+                        storageTitle.includes(title) ? "favEpisodePath" : ""
+                      }`}
+                      onClick={() =>
+                        favEpisode(title, episode, filteredSeason, seasons)
+                      }
+                    >
+                      <h3>
+                        Set as Favorite:{" "}
+                        <span>
+                          <IoIosStar />
+                        </span>{" "}
+                      </h3>
+                    </div>
+                    <p>{description}</p>
+                    <div className="audioPlayer">
+                      <audio controls className="audioControls">
+                        <source src={file} type="audio/mpeg"></source>
+                      </audio>
+                    </div>
                   </div>
-                  <p>{description}</p>
-                  <div className="audioPlayer">
-                    <audio controls className="audioControls">
-                      <source src={file} type="audio/mpeg"></source>
-                    </audio>
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </>
   );
