@@ -55,22 +55,26 @@ const Podcast = () => {
       const genre: number[] = genres;
       const des: string = description;
       const modifiedText = des
-        .replace(/\*{3}/g, "")
-        .replace(/\.{3}/g, "…")
+        .replace(/\*{3}/g, "") // removes all * characters
+        .replace(/\.{3}/g, "…") // removes all . characters
         .replace(
           /(https?:\/\/)?(www\.[a-zA-Z0-9_-]+\.(com|net|org|io|edu)(\/[^\s]*)?)/g,
           "$2"
-        )
+        ) // Finds and replace links with http, https or www with the rest of the path and/or replaces http(s)
         .replace(
           /(https?:\/\/[a-zA-Z0-9._-]+\.com[^\s]*)|((?:https?:\/\/|www\.)?[a-zA-Z0-9._-]+\.[a-zA-Z]{2,}(\/[^\s]*)?)|([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g,
-          (match, comUrl, otherUrl, _, email) => {
+          // Find and make http(s) to links and that start with www with http(s) being optional then find email address
+          (match, comUrl, otherUrl, email) => {
+            // Match the entire string||matches .com||matches general urls||matches email
             if (comUrl) {
+              // It creates a link and removes http(s)
               return /*html*/ `<a href="${comUrl}" target="_blank" rel="noopener noreferrer">${comUrl.replace(
                 /https?:\/\//,
                 ""
               )}</a>`;
             }
             if (otherUrl) {
+              // If http is there, then it is not removed, if there isn't, it adds it to make a valid link, it creates a link and removes http(s)
               const href = otherUrl.startsWith("http")
                 ? otherUrl
                 : `http://${otherUrl}`;
@@ -78,6 +82,7 @@ const Podcast = () => {
               return /*html*/ `<a href="${href}" target="_blank" rel="noopener noreferrer">${displayText}</a>`;
             }
             if (email) {
+              // Creates a mail to link and clickable for sending an email
               return /*html*/ `<a class='email' href="mailto:${email}">${email}</a>`;
             }
             return match;
@@ -100,7 +105,7 @@ const Podcast = () => {
             <h2>About</h2>
             <div
               className="paragraph"
-              dangerouslySetInnerHTML={{ __html: modifiedText }}
+              dangerouslySetInnerHTML={{ __html: modifiedText }} // Insert out text as HTML text, render text as a link
             />
           </div>
         </div>

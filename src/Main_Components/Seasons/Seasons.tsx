@@ -69,6 +69,12 @@ const Seasons = () => {
   const currentDate = date.toLocaleString();
 
   useEffect(() => {
+    outletPod.map(({ key }) => {
+      setEndpoint(key);
+    });
+  }, [outletPod]);
+
+  useEffect(() => {
     if (endpoint) {
       fetch(`https://podcast-api.netlify.app/id/${endpoint}`)
         .then((prom) => prom.json())
@@ -77,12 +83,6 @@ const Seasons = () => {
         .finally(() => setLoad(false));
     }
   }, [endpoint]);
-
-  useEffect(() => {
-    outletPod.map(({ key }) => {
-      setEndpoint(key);
-    });
-  }, [outletPod]);
 
   const handleEventChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setSeasonOption(e.target.value);
