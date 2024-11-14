@@ -64,7 +64,7 @@ const Podcast = () => {
         .replace(
           /(https?:\/\/[a-zA-Z0-9._-]+\.com[^\s]*)|((?:https?:\/\/|www\.)?[a-zA-Z0-9._-]+\.[a-zA-Z]{2,}(\/[^\s]*)?)|([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g,
           // Find and make http(s) to links and that start with www with http(s) being optional then find email address
-          (match, comUrl, otherUrl, email) => {
+          (match, comUrl, otherUrl, _, email) => {
             // Match the entire string||matches .com||matches general urls||matches email
             if (comUrl) {
               // It creates a link and removes http(s)
