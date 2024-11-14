@@ -20,20 +20,20 @@ const MainBody = () => {
   const [podcast, setPodcast] = useState([]);
   const [load, setLoad] = useState(false);
   const [error, setError] = useState(null);
-  const [type, setType] = useSearchParams();
+  const [type, setType] = useSearchParams(); //To get type for filtering
   const [toggleOrder, setToggleOrder] = useState(true);
   const [toggleDateOrder, setToggleDateOrder] = useState(false);
-  const [activeSort, setActiveSort] = useState<string | null>(null);
+  const [activeSort, setActiveSort] = useState<string | null>(null); // To set as a-z first when the page refreshes
   const [description, setDescription] = useState<Description>({
     id: 0,
     title: "",
     description: "",
     shows: [""],
   });
-  const typeFilter = type.get("type");
-  const filterDes = description.description;
+  const typeFilter = type.get("type"); //Returns as a string
+  const filterDes = description.description; //Filter description when the user clicks on the filter
   const filteredPodcast = podcast.filter(({ genres }) => {
-    const genre: number[] = genres;
+    const genre: number[] = genres; //Genres set as numbers
     if (genre.includes(Number(typeFilter))) {
       return genre;
     }
@@ -44,11 +44,11 @@ const MainBody = () => {
     if (toggleDateOrder) {
       const dateA = new Date(a.updated.slice(0, 10)).getTime();
       const dateB = new Date(b.updated.slice(0, 10)).getTime();
-      return dateA - dateB;
+      return dateA - dateB; //oldest-newest
     } else {
       const dateA = new Date(a.updated.slice(0, 10)).getTime();
       const dateB = new Date(b.updated.slice(0, 10)).getTime();
-      return dateB - dateA;
+      return dateB - dateA; //newest-oldest
     }
   });
   const genreArray: string[] = [
@@ -62,18 +62,18 @@ const MainBody = () => {
     "News",
     "Kids and Family",
   ];
-  const filterFlex = window.matchMedia("(max-width: 480px)");
+  const filterFlex = window.matchMedia("(max-width: 480px)"); //To get boolean and to get a whole new body if it is true
   const filterName = genreArray[Number(typeFilter) - 1] || "";
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [typeFilter]);
+  }, [typeFilter]); //For when the user clicks on a link
 
   useEffect(() => {
     setLoad(true);
     const genreUrl = `https://podcast-api.netlify.app/genre/${Number(
       typeFilter
-    )}`;
+    )}`; //For the description filter
     const defaultUrl = "https://podcast-api.netlify.app/";
     const fetchPromises = typeFilter
       ? [
@@ -96,6 +96,7 @@ const MainBody = () => {
   }, [typeFilter]);
 
   if (activeSort === null) {
+    //For when the active sort is false or has a string
     newDateArray.sort((a, b) =>
       toggleOrder
         ? a.title.localeCompare(b.title)
@@ -110,6 +111,7 @@ const MainBody = () => {
   }
 
   function handleFilterType(key: string, type: string | null) {
+    //for replacing the previous type
     setType((prev) => {
       if (type === null) {
         prev.delete(key);
@@ -120,11 +122,13 @@ const MainBody = () => {
     });
   }
   const sortTitleDateArray = () => {
+    //onClick function;date
     setToggleDateOrder(!toggleDateOrder);
     setActiveSort("sort");
   };
 
   const sortTitleArray = () => {
+    //onClick function;alphabetically
     setActiveSort(null);
     setToggleOrder(!toggleOrder);
   };
@@ -150,9 +154,18 @@ const MainBody = () => {
     );
   });
 
+  if (load) {
+    return <h1>Loading...</h1>;
+  }
+
+  if (error) {
+    return <h1 className="jsonError">Something went wrong!!</h1>;
+  }
+
   if (typeFilter && filterFlex.matches) {
     return (
       <>
+        {/* Filtered Podcast Name */}
         <h1 className="filterName">{filterName}</h1>
         <div className="about">
           {typeFilter ? <h2>About</h2> : null}
@@ -179,6 +192,7 @@ const MainBody = () => {
             </h2>
           </div>
         </div>
+        {/* Podcast Variable */}
         <div className="preview">{pod}</div>
         <div className="buttons">
           <button
@@ -256,14 +270,6 @@ const MainBody = () => {
         </div>
       </>
     );
-  }
-
-  if (load) {
-    return <h1>Loading...</h1>;
-  }
-
-  if (error) {
-    return <h1 className="jsonError">Something went wrong!!</h1>;
   }
 
   return (
@@ -367,6 +373,7 @@ const MainBody = () => {
           </h2>
         </div>
       </div>
+      {/* Podcast Variable */}
       <div className="preview">{pod}</div>
     </>
   );

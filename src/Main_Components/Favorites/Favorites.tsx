@@ -32,6 +32,7 @@ const Favorites = () => {
   }, [location.pathname]);
 
   const removeFav = (title: string) => {
+    //OnClick. Remove the favorite episode
     setDel(!del);
     const removedFav = JSON.parse(
       localStorage.getItem("FavoriteNames") || "[]"
@@ -47,7 +48,7 @@ const Favorites = () => {
     );
     localStorage.setItem("FavoriteNames", JSON.stringify(sortedTitle));
     setToggleOrder(!toggleOrder);
-    localStorage.setItem("Toggle Order", JSON.stringify(toggleOrder));
+    localStorage.setItem("Toggle Order", JSON.stringify(toggleOrder)); //set to true or false
   };
 
   const storageFavInfo = favoriteStorage.map(

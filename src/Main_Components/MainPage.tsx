@@ -8,7 +8,7 @@ const MainPage = () => {
     <div className="mainPage">
       <Header />
       <main>
-        <Outlet />
+        <Outlet /> {/* Render all the components */}
       </main>
       <Footer />
     </div>
