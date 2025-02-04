@@ -137,6 +137,18 @@ const MainBody = () => {
     return updated.slice(0, updated.indexOf("T"));
   }
 
+  const filterButton = (number: string) => {
+    return (
+      <button
+        className={`genreType ${typeFilter === number ? "selected" : ""}`}
+        type="button"
+        onClick={() => handleFilterType("type", number)}
+      >
+        {genreArray[Number(number) - 1]}
+      </button>
+    );
+  };
+
   const pod = newDateArray.map(({ image, id, title, updated }) => {
     return (
       <Link
@@ -195,69 +207,16 @@ const MainBody = () => {
         {/* Podcast Variable */}
         <div className="preview">{pod}</div>
         <div className="buttons">
-          <button
-            className={`genreType ${typeFilter === "1" ? "selected" : ""}`}
-            type="button"
-            onClick={() => handleFilterType("type", "1")}
-          >
-            Personal Growth
-          </button>
-          <button
-            className={`genreType ${typeFilter === "2" ? "selected" : ""}`}
-            type="button"
-            onClick={() => handleFilterType("type", "2")}
-          >
-            Investigative Journalism
-          </button>
-          <button
-            className={`genreType ${typeFilter === "3" ? "selected" : ""}`}
-            type="button"
-            onClick={() => handleFilterType("type", "3")}
-          >
-            History
-          </button>
-          <button
-            className={`genreType ${typeFilter === "4" ? "selected" : ""}`}
-            type="button"
-            onClick={() => handleFilterType("type", "4")}
-          >
-            Comedy
-          </button>
-          <button
-            className={`genreType ${typeFilter === "5" ? "selected" : ""}`}
-            type="button"
-            onClick={() => handleFilterType("type", "5")}
-          >
-            Entertainment
-          </button>
-          <button
-            className={`genreType ${typeFilter === "6" ? "selected" : ""}`}
-            type="button"
-            onClick={() => handleFilterType("type", "6")}
-          >
-            Business
-          </button>
-          <button
-            className={`genreType ${typeFilter === "7" ? "selected" : ""}`}
-            type="button"
-            onClick={() => handleFilterType("type", "7")}
-          >
-            Fiction
-          </button>
-          <button
-            className={`genreType ${typeFilter === "8" ? "selected" : ""}`}
-            type="button"
-            onClick={() => handleFilterType("type", "8")}
-          >
-            News
-          </button>
-          <button
-            className={`genreType ${typeFilter === "9" ? "selected" : ""}`}
-            type="button"
-            onClick={() => handleFilterType("type", "9")}
-          >
-            Kids and Family
-          </button>
+          {filterButton("1")}
+          {filterButton("2")}
+          {filterButton("3")}
+          {filterButton("4")}
+          {filterButton("4")}
+          {filterButton("5")}
+          {filterButton("6")}
+          {filterButton("7")}
+          {filterButton("8")}
+          {filterButton("9")}
           {typeFilter ? (
             <button
               className={`genreType clear-filters`}
@@ -275,69 +234,16 @@ const MainBody = () => {
   return (
     <>
       <div className="buttons">
-        <button
-          className={`genreType ${typeFilter === "1" ? "selected" : ""}`}
-          type="button"
-          onClick={() => handleFilterType("type", "1")}
-        >
-          Personal Growth
-        </button>
-        <button
-          className={`genreType ${typeFilter === "2" ? "selected" : ""}`}
-          type="button"
-          onClick={() => handleFilterType("type", "2")}
-        >
-          Investigative Journalism
-        </button>
-        <button
-          className={`genreType ${typeFilter === "3" ? "selected" : ""}`}
-          type="button"
-          onClick={() => handleFilterType("type", "3")}
-        >
-          History
-        </button>
-        <button
-          className={`genreType ${typeFilter === "4" ? "selected" : ""}`}
-          type="button"
-          onClick={() => handleFilterType("type", "4")}
-        >
-          Comedy
-        </button>
-        <button
-          className={`genreType ${typeFilter === "5" ? "selected" : ""}`}
-          type="button"
-          onClick={() => handleFilterType("type", "5")}
-        >
-          Entertainment
-        </button>
-        <button
-          className={`genreType ${typeFilter === "6" ? "selected" : ""}`}
-          type="button"
-          onClick={() => handleFilterType("type", "6")}
-        >
-          Business
-        </button>
-        <button
-          className={`genreType ${typeFilter === "7" ? "selected" : ""}`}
-          type="button"
-          onClick={() => handleFilterType("type", "7")}
-        >
-          Fiction
-        </button>
-        <button
-          className={`genreType ${typeFilter === "8" ? "selected" : ""}`}
-          type="button"
-          onClick={() => handleFilterType("type", "8")}
-        >
-          News
-        </button>
-        <button
-          className={`genreType ${typeFilter === "9" ? "selected" : ""}`}
-          type="button"
-          onClick={() => handleFilterType("type", "9")}
-        >
-          Kids and Family
-        </button>
+        {filterButton("1")}
+        {filterButton("2")}
+        {filterButton("3")}
+        {filterButton("4")}
+        {filterButton("4")}
+        {filterButton("5")}
+        {filterButton("6")}
+        {filterButton("7")}
+        {filterButton("8")}
+        {filterButton("9")}
         {typeFilter ? (
           <button
             className={`genreType clear-filters`}

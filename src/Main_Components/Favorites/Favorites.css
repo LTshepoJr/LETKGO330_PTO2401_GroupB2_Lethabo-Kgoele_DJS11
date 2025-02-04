@@ -8,6 +8,7 @@
 .titleSorting {
   text-align: center;
 }
+
 .titleSorting h2 {
   color: #55cddb;
   cursor: pointer;
@@ -17,6 +18,7 @@
   align-items: center;
   justify-content: center;
 }
+
 .titleSorting h2 span {
   padding-top: 9px;
   align-self: center;
@@ -55,6 +57,11 @@
 .titleSorting h5 > span {
   margin: 3px;
   font-size: 1.7rem;
+}
+
+.titleSorting h5 > span:hover {
+  color: red;
+  cursor: pointer;
 }
 .titleSorting h6 {
   color: var(--uranian-blue);

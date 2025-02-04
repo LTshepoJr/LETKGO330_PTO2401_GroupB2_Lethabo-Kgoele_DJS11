@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { FaSortAlphaDown, FaSortAlphaUp } from "react-icons/fa";
+// import { RiSortNumberAsc, RiSortNumberDesc } from "react-icons/ri";
 import { useLocation } from "react-router-dom";
 import { MdDelete } from "react-icons/md";
 import "./Favorites.css";
@@ -8,7 +9,7 @@ const Favorites = () => {
   interface PodcastStorage {
     episode: string;
     name: string;
-    season: string;
+    season: string[];
     date: string;
   }
 
@@ -17,11 +18,23 @@ const Favorites = () => {
     podcast: PodcastStorage;
   }
 
+  interface itemsDetails {
+    title: string;
+    episode: string;
+    date: string;
+  }
+  interface GroupedPodcasts {
+    name: string;
+    seasons: string[];
+    items: itemsDetails[];
+  }
+
   const location = useLocation();
   const storageBoolean = JSON.parse(
     localStorage.getItem("Toggle Order") || "true"
   );
   const [toggleOrder, setToggleOrder] = useState(false);
+  // const [toggleDateOrder, setToggleDateOrder] = useState(false);
   const favoriteStorage: StorageInfo[] = JSON.parse(
     localStorage.getItem("FavoriteNames") || "[]"
   );
@@ -31,6 +44,37 @@ const Favorites = () => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
 
+  function groupPodcasts(episodes: StorageInfo[]): GroupedPodcasts[] {
+    const groups = new Map<string, GroupedPodcasts>();
+    for (const episode of episodes) {
+      // Create a normalized key combining podcast name and sorted seasons
+      const sortedSeasons = episode.podcast.season;
+      const groupKey = `${episode.podcast.name}_${sortedSeasons}`;
+      if (!groups.has(groupKey)) {
+        groups.set(groupKey, {
+          name: episode.podcast.name,
+          seasons: sortedSeasons,
+          items: [],
+        });
+      }
+
+      groups.get(groupKey)?.items.push({
+        title: episode.title,
+        episode: episode.podcast.episode,
+        date: episode.podcast.date,
+      });
+    }
+
+    return Array.from(groups.values());
+  }
+
+  const storedData = localStorage.getItem("FavoriteNames");
+  const podcastEpisodes: StorageInfo[] = storedData
+    ? JSON.parse(storedData)
+    : [];
+
+  const groupedResults = groupPodcasts(podcastEpisodes);
+
   const removeFav = (title: string) => {
     //OnClick. Remove the favorite episode
     setDel(!del);
@@ -39,6 +83,23 @@ const Favorites = () => {
     ).filter((name: StorageInfo) => name.title !== `${title}`);
     localStorage.setItem("FavoriteNames", JSON.stringify(removedFav));
   };
+
+  // const newDateArray = [...favoriteStorage].sort((a, b) => {
+  //   if (toggleDateOrder) {
+  //     const dateA = new Date(a.updated.slice(0, 10)).getTime();
+  //     const dateB = new Date(b.updated.slice(0, 10)).getTime();
+  //     return dateA - dateB; //oldest-newest
+  //   } else {
+  //     const dateA = new Date(a.updated.slice(0, 10)).getTime();
+  //     const dateB = new Date(b.updated.slice(0, 10)).getTime();
+  //     return dateB - dateA; //newest-oldest
+  //   }
+  // });
+
+  // const podcastArray: PodcastStorage[] = favoriteStorage.map(
+  //   ({ podcast }) => podcast
+  // );
+  // console.log(podcastArray);
 
   const sortTitles = () => {
     const sortedTitle = favoriteStorage.sort((a, b) =>
@@ -51,39 +112,58 @@ const Favorites = () => {
     localStorage.setItem("Toggle Order", JSON.stringify(toggleOrder)); //set to true or false
   };
 
-  const storageFavInfo = favoriteStorage.map(
-    ({ title, podcast: { episode, name, season, date } }) => {
+  // const sortDate = () => {
+  //   console.log(newDateArray);
+  //   setToggleDateOrder(!toggleDateOrder);
+  // };
+
+  const storageFavInfo = groupedResults.map(({ name, seasons, items }) => {
+    const item = items.map(({ episode, title, date }) => {
       return (
-        <li key={title}>
-          <h3>{name}</h3>
-          <h4>
-            {season}: {episode}
-          </h4>
+        <div key={title}>
           <h5>
-            {title}
-            <span id={`episode${title}`} onClick={() => removeFav(title)}>
+            {`${episode} | ${title}`}
+            <span onClick={() => removeFav(title)}>
               <MdDelete />
             </span>
           </h5>
-          <h6>Date added: {date}</h6>
-        </li>
+          <h6>{`Date Added: ${date}`}</h6>
+        </div>
       );
-    }
-  );
+    });
+    return (
+      <li key={`${name}-${seasons}`}>
+        <div>
+          <h3>{name}</h3>
+          <h4>{seasons}</h4>
+          {item}
+        </div>
+      </li>
+    );
+  });
 
   if (!localStorage.getItem("FavoriteNames") || !favoriteStorage[0]) {
     return <h1>NO FAVORITES!</h1>;
   }
 
   return (
-    <div className="titleSorting">
-      <h2 onClick={sortTitles}>
-        Favorite Episode Titles:
-        <span>{!storageBoolean ? <FaSortAlphaDown /> : <FaSortAlphaUp />}</span>
-      </h2>
-      <hr />
-      <ul>{storageFavInfo}</ul>
-    </div>
+    <>
+      <div className="titleSorting">
+        <h2 onClick={sortTitles}>
+          Favorite Episode Titles:
+          <span>
+            {!storageBoolean ? <FaSortAlphaDown /> : <FaSortAlphaUp />}
+          </span>
+        </h2>
+        {/* <h2>
+          Sort Date:
+          {!toggleDateOrder ? " Latest" : " Oldest"}
+          {toggleDateOrder ? <RiSortNumberAsc /> : <RiSortNumberDesc />}
+        </h2> */}
+        <hr />
+        <ul>{storageFavInfo}</ul>
+      </div>
+    </>
   );
 };
 
