@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { FaSortAlphaDown, FaSortAlphaUp } from "react-icons/fa";
-// import { RiSortNumberAsc, RiSortNumberDesc } from "react-icons/ri";
+import { RiSortNumberAsc, RiSortNumberDesc } from "react-icons/ri";
 import { useLocation } from "react-router-dom";
 import { MdDelete } from "react-icons/md";
 import "./Favorites.css";
@@ -33,12 +33,16 @@ const Favorites = () => {
   const storageBoolean = JSON.parse(
     localStorage.getItem("Toggle Order") || "true"
   );
+  const storageDateBoolean = JSON.parse(
+    localStorage.getItem("Toggle Date Order") || "true"
+  );
   const [toggleOrder, setToggleOrder] = useState(false);
-  // const [toggleDateOrder, setToggleDateOrder] = useState(false);
+  const [toggleDateOrder, setToggleDateOrder] = useState(false);
   const favoriteStorage: StorageInfo[] = JSON.parse(
     localStorage.getItem("FavoriteNames") || "[]"
   );
   const [del, setDel] = useState(false);
+  const groupedResults = groupPodcasts(favoriteStorage);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -68,13 +72,6 @@ const Favorites = () => {
     return Array.from(groups.values());
   }
 
-  const storedData = localStorage.getItem("FavoriteNames");
-  const podcastEpisodes: StorageInfo[] = storedData
-    ? JSON.parse(storedData)
-    : [];
-
-  const groupedResults = groupPodcasts(podcastEpisodes);
-
   const removeFav = (title: string) => {
     //OnClick. Remove the favorite episode
     setDel(!del);
@@ -83,23 +80,6 @@ const Favorites = () => {
     ).filter((name: StorageInfo) => name.title !== `${title}`);
     localStorage.setItem("FavoriteNames", JSON.stringify(removedFav));
   };
-
-  // const newDateArray = [...favoriteStorage].sort((a, b) => {
-  //   if (toggleDateOrder) {
-  //     const dateA = new Date(a.updated.slice(0, 10)).getTime();
-  //     const dateB = new Date(b.updated.slice(0, 10)).getTime();
-  //     return dateA - dateB; //oldest-newest
-  //   } else {
-  //     const dateA = new Date(a.updated.slice(0, 10)).getTime();
-  //     const dateB = new Date(b.updated.slice(0, 10)).getTime();
-  //     return dateB - dateA; //newest-oldest
-  //   }
-  // });
-
-  // const podcastArray: PodcastStorage[] = favoriteStorage.map(
-  //   ({ podcast }) => podcast
-  // );
-  // console.log(podcastArray);
 
   const sortTitles = () => {
     const sortedTitle = favoriteStorage.sort((a, b) =>
@@ -112,10 +92,22 @@ const Favorites = () => {
     localStorage.setItem("Toggle Order", JSON.stringify(toggleOrder)); //set to true or false
   };
 
-  // const sortDate = () => {
-  //   console.log(newDateArray);
-  //   setToggleDateOrder(!toggleDateOrder);
-  // };
+  const sortDate = () => {
+    const newDateArray = favoriteStorage.sort((a, b) => {
+      if (toggleDateOrder) {
+        const dateA = new Date(a.podcast.date).getTime();
+        const dateB = new Date(b.podcast.date).getTime();
+        return dateA - dateB; //oldest-newest
+      } else {
+        const dateA = new Date(a.podcast.date).getTime();
+        const dateB = new Date(b.podcast.date).getTime();
+        return dateB - dateA; //newest-oldest
+      }
+    });
+    localStorage.setItem("FavoriteNames", JSON.stringify(newDateArray));
+    setToggleDateOrder(!toggleDateOrder);
+    localStorage.setItem("Toggle Date Order", JSON.stringify(toggleDateOrder)); //set to true or false
+  };
 
   const storageFavInfo = groupedResults.map(({ name, seasons, items }) => {
     const item = items.map(({ episode, title, date }) => {
@@ -155,11 +147,11 @@ const Favorites = () => {
             {!storageBoolean ? <FaSortAlphaDown /> : <FaSortAlphaUp />}
           </span>
         </h2>
-        {/* <h2>
+        <h2 onClick={() => sortDate()}>
           Sort Date:
-          {!toggleDateOrder ? " Latest" : " Oldest"}
-          {toggleDateOrder ? <RiSortNumberAsc /> : <RiSortNumberDesc />}
-        </h2> */}
+          {!storageDateBoolean ? " Latest" : " Oldest"}
+          {storageDateBoolean ? <RiSortNumberAsc /> : <RiSortNumberDesc />}
+        </h2>
         <hr />
         <ul>{storageFavInfo}</ul>
       </div>
